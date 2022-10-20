@@ -20,7 +20,7 @@ namespace Canturi.Web.Controllers
         //
         // GET: /Account/Login
 
-        // Testing for Git Config
+        // Testing for Git Config Second time
 
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
