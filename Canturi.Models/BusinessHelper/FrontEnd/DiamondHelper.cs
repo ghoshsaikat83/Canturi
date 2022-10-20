@@ -518,7 +518,7 @@ namespace Canturi.Models.BusinessHelper.FrontEnd
 
 
 
-            sqlQuery.Append("  SELECT *,dbo.Udf_GetPrice(Price,'AUD') AS Amount FROM tblFineStarDiamond  WHERE LAB ='GIA' ");
+            sqlQuery.Append("  SELECT *,dbo.Udf_GetPriceCalculation(Price,'" + UserSessionData.Currency.ToUpper() + "',Carat) AS Amount FROM tblFineStarDiamond  WHERE LAB ='GIA' ");
 
             sqlQuery.Append(" ) T1 ");
             SearchCondition(objDiamondModels, sqlQuery);
@@ -541,7 +541,7 @@ namespace Canturi.Models.BusinessHelper.FrontEnd
             }
 
 
-            sqlQuery.Append(" SELECT *,'FineStar' AS TableType,dbo.Udf_GetPrice(Price,'" + UserSessionData.Currency.ToUpper() + "') AS Amount FROM tblFineStarDiamond  WHERE LAB ='GIA' ");
+            sqlQuery.Append(" SELECT *,'FineStar' AS TableType,dbo.Udf_GetPriceCalculation(Price,'" + UserSessionData.Currency.ToUpper() + "',Carat) AS Amount FROM tblFineStarDiamond  WHERE LAB ='GIA' ");
 
 
             sqlQuery.Append(" )Tmp ");
@@ -915,7 +915,7 @@ namespace Canturi.Models.BusinessHelper.FrontEnd
             sqlQuery.Append("union all SELECT *,dbo.Udf_GetPrice(Price,'AUD') AS Amount FROM tblDharmDiamond  WHERE LAB ='GIA' ");
             sqlQuery.Append("union all SELECT *,dbo.Udf_GetPrice(Price,'AUD') AS Amount FROM tblYDVashDiamond  WHERE LAB ='GIA' ");
             sqlQuery.Append("union all SELECT *,dbo.Udf_GetPrice(Price,'AUD') AS Amount FROM tblHariKrishnaDiamond  WHERE LAB ='GIA' ");
-            sqlQuery.Append("union all SELECT *,dbo.Udf_GetPrice(Price,'AUD') AS Amount FROM tblFineStarDiamond  WHERE LAB ='GIA' ");
+            sqlQuery.Append("union all SELECT *,dbo.Udf_GetPriceCalculation(Price,'AUD',Carat) AS Amount FROM tblFineStarDiamond  WHERE LAB ='GIA' ");
             sqlQuery.Append("union all SELECT *,dbo.Udf_GetPrice(Price,'AUD') AS Amount FROM tblCDINESHDiamond  WHERE LAB ='GIA' ");
             sqlQuery.Append("union all SELECT *,dbo.Udf_GetPrice(Price,'AUD') AS Amount FROM tblKapuGemsDiamond  WHERE LAB ='GIA' ");
             sqlQuery.Append("union all SELECT *,dbo.Udf_GetPrice(Price,'AUD') AS Amount FROM tblKiranGemsDiamond  WHERE LAB ='GIA' ");
@@ -989,7 +989,7 @@ namespace Canturi.Models.BusinessHelper.FrontEnd
             sqlQuery.Append(" SELECT *,'HariKrishna' AS TableType,dbo.Udf_GetPrice(Price,'" + UserSessionData.Currency.ToUpper() + "') AS Amount FROM tblHariKrishnaDiamond  WHERE LAB ='GIA' ");
 
             sqlQuery.Append(" union all ");
-            sqlQuery.Append(" SELECT *,'FineStar' AS TableType,dbo.Udf_GetPrice(Price,'" + UserSessionData.Currency.ToUpper() + "') AS Amount FROM tblFineStarDiamond  WHERE LAB ='GIA' ");
+            sqlQuery.Append(" SELECT *,'FineStar' AS TableType,dbo.Udf_GetPriceCalculation(Price,'" + UserSessionData.Currency.ToUpper() + "',Carat) AS Amount FROM tblFineStarDiamond  WHERE LAB ='GIA' ");
 
             sqlQuery.Append(" union all ");
             sqlQuery.Append(" SELECT *,'CDINESH' AS TableType,dbo.Udf_GetPrice(Price,'" + UserSessionData.Currency.ToUpper() + "') AS Amount FROM tblCDINESHDiamond  WHERE LAB ='GIA' ");

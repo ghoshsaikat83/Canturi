@@ -36,6 +36,8 @@ namespace Canturi.JBBrosDataService
                 str1.WriteLine("Error Component Initialization - " + DateTime.Now.ToString() + " - " + ex.Message.ToString() + " - " + ex.StackTrace.ToString());
                 str1.Close();
             }
+            Diamond objDiamond = new Diamond();
+            objDiamond.JBBrosDiamond();
         }
 
         protected override void OnStart(string[] args)
@@ -52,6 +54,7 @@ namespace Canturi.JBBrosDataService
                 str2.WriteLine("Error Timer On Start - " + DateTime.Now.ToString() + " - " + ex.Message.ToString() + " - " + ex.StackTrace.ToString());
                 str2.Close();
             }
+
         }
 
         protected override void OnStop()

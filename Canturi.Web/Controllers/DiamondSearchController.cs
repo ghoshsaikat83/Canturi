@@ -1006,7 +1006,7 @@ namespace Canturi.Web.Controllers
                     {
                         strFineStarDiamondIds = strFineStarDiamondIds.TrimEnd(',');
                     }
-                    sqlQuery = sqlQuery + "SELECT *,'FineStar' AS TableType,dbo.Udf_GetPrice(Price,'" + UserSessionData.Currency.ToUpper() + "') AS Amount FROM tblFineStarDiamond WHERE DiamondID IN (" + strFineStarDiamondIds + ")";
+                    sqlQuery = sqlQuery + "SELECT *,'FineStar' AS TableType,dbo.Udf_GetPriceCalculation(Price,'" + UserSessionData.Currency.ToUpper() + "',Carat) AS Amount FROM tblFineStarDiamond WHERE DiamondID IN (" + strFineStarDiamondIds + ")";
                 }
 
                 if (!String.IsNullOrEmpty(strCDINESHDiamondIds))
@@ -2275,7 +2275,7 @@ namespace Canturi.Web.Controllers
                     {
                         strFineStarDiamondIds = strFineStarDiamondIds.TrimEnd(',');
                     }
-                    sqlQuery = sqlQuery + "SELECT *,'FineStar' AS TableType,dbo.Udf_GetPrice(Price,'" + UserSessionData.Currency.ToUpper() + "') AS Amount FROM tblFineStarDiamond " +
+                    sqlQuery = sqlQuery + "SELECT *,'FineStar' AS TableType,dbo.Udf_GetPriceCalculation(Price,'" + UserSessionData.Currency.ToUpper() + "',Carat) AS Amount FROM tblFineStarDiamond " +
                                         "WHERE DiamondID IN (" + strFineStarDiamondIds + ")";
                 }
 

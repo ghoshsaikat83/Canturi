@@ -74,7 +74,7 @@ namespace Canturi.Web.Controllers
                 }
                 else if (type.ToLower() == "7")
                 {
-                    strQuery = "SELECT *,[dbo].[Udf_IsDiamondOrderd] (tblFineStarDiamond.LotNumber,'F') AS IsDiamondOrderd,dbo.Udf_GetPrice(Price,'" + UserSessionData.Currency.ToUpper() + "') AS Amount FROM tblFineStarDiamond WHERE DiamondID=" + id;
+                    strQuery = "SELECT *,[dbo].[Udf_IsDiamondOrderd] (tblFineStarDiamond.LotNumber,'F') AS IsDiamondOrderd,dbo.Udf_GetPriceCalculation(Price,'" + UserSessionData.Currency.ToUpper() + "',Carat) AS Amount FROM tblFineStarDiamond WHERE DiamondID=" + id;
                 }
                 else if (type.ToLower() == "8")
                 {
@@ -381,7 +381,7 @@ namespace Canturi.Web.Controllers
                             }
                             else if (model.Type.ToLower() == "7")//FineStar
                             {
-                                strQuery = "SELECT *,dbo.Udf_GetPrice(Price,'" + UserSessionData.Currency.ToUpper() + "') AS Amount FROM tblFineStarDiamond WHERE DiamondID=" + model.DiamondId;
+                                strQuery = "SELECT *,dbo.Udf_GetPriceCalculation(Price,'" + UserSessionData.Currency.ToUpper() + "',Carat) AS Amount FROM tblFineStarDiamond WHERE DiamondID=" + model.DiamondId;
                             }
                             else if (model.Type.ToLower() == "8")//CDINESH
                             {
@@ -1130,7 +1130,7 @@ namespace Canturi.Web.Controllers
                     //}
                     else if (model.Type.ToLower() == "5")//YDVASH
                     {
-                        strQuery = "SELECT *,dbo.Udf_GetPrice(Price,'" + UserSessionData.Currency.ToUpper() + "') AS Amount FROM tblYDVashDiamond WHERE DiamondID=" + model.DiamondId;
+                        strQuery = "SELECT *,dbo.Udf_GetPriceCalculation(Price,'" + UserSessionData.Currency.ToUpper() + "') AS Amount FROM tblYDVashDiamond WHERE DiamondID=" + model.DiamondId;
                     }
                     else if (model.Type.ToLower() == "6")//Hari Krishna
                     {
@@ -1138,7 +1138,7 @@ namespace Canturi.Web.Controllers
                     }
                     else if (model.Type.ToLower() == "7")//FineStar
                     {
-                        strQuery = "SELECT *,dbo.Udf_GetPrice(Price,'" + UserSessionData.Currency.ToUpper() + "') AS Amount FROM tblFineStarDiamond WHERE DiamondID=" + model.DiamondId;
+                        strQuery = "SELECT *,'' as Ratio, dbo.Udf_GetPriceCalculation(Price,'" + UserSessionData.Currency.ToUpper() + "',Carat) AS Amount FROM tblFineStarDiamond WHERE DiamondID=" + model.DiamondId;
                     }
                     else if (model.Type.ToLower() == "8")//CDINESH
                     {

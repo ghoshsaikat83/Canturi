@@ -44,7 +44,7 @@ namespace Canturi.JBBrosDataService
                 StringBuilder sb = new StringBuilder();
                 sb.Append("https://websvr.jbbros.com/jbapi.aspx?UserId=" + ConfigurationSettings.AppSettings["APIUserId"].ToString());
                 sb.Append("&APIKey=" + ConfigurationSettings.AppSettings["APIKey"].ToString());
-                sb.Append("&Action=S&Shape=" + ConfigurationSettings.AppSettings["Shape"].ToString());
+                sb.Append("&Action=FJ&Shape=" + ConfigurationSettings.AppSettings["Shape"].ToString());
                 sb.Append("&CaratFrom=" + ConfigurationSettings.AppSettings["CaratFrom"].ToString());
                 sb.Append("&CaratTo=" + ConfigurationSettings.AppSettings["CaratTo"].ToString());
                 sb.Append("&Color=" + Color);
