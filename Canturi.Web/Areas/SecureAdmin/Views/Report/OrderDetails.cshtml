@@ -1,0 +1,230 @@
+﻿@using System.Data
+@{
+    ViewBag.Title = "Order Details";
+    Layout = "~/Areas/SecureAdmin/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    .style1 {
+        height: 30px;
+    }
+
+    .style2 {
+        height: 39px;
+    }
+
+    .style3 {
+        height: 127px;
+    }
+</style>
+<section class="content-header">
+    <h1>
+        Order Requests 
+        <small>Control panel</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Content("~/SecureAdmin/DashBoard")"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active"> Order Requests </li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="box box-primary">
+            <div class="box-header">
+                <h3 class="box-title">
+                    
+                </h3>
+            </div>
+            <div class="top-buttons-container">
+                <a href="@Url.Content("~/SecureAdmin/report/order")" class="btn btn-success">Back</a>                
+            </div>
+            @{
+                DataTable dtOrderDetails = ViewBag.OrderDetails as DataTable;
+                if (dtOrderDetails != null)
+                {
+                    if (dtOrderDetails.Rows.Count != 0)
+                    {
+                        <div class="box-body report-details">
+                            <div class="form-group">
+                                @Html.Label("Customer Name: ") @dtOrderDetails.Rows[0]["CustomerName"].ToString()
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Consultant Email: ") @dtOrderDetails.Rows[0]["ConsultantEmail"].ToString()
+                            </div>
+                            @*<div class="form-group">
+                                @Html.Label("Order #: ") @dtOrderDetails.Rows[0]["OrderNumber"].ToString()
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("JCS Customer#: ") @dtOrderDetails.Rows[0]["JcsCustomerNumber"].ToString()
+                            </div>*@
+                            <div class="form-group">
+                                @Html.Label("Order Due Date: ") @dtOrderDetails.Rows[0]["DueDate"].ToString()
+                            </div>
+                            <div class="form-group heading">DIAMOND DETAILS</div>
+                            <div class="form-group">
+                                @Html.Label("Shape: ") @dtOrderDetails.Rows[0]["Shape"].ToString()
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Color: ") @dtOrderDetails.Rows[0]["Color"].ToString()
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Clarity: ") @dtOrderDetails.Rows[0]["Clarity"].ToString()
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Cut: ") @dtOrderDetails.Rows[0]["Cut"].ToString()
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Polish: ") @dtOrderDetails.Rows[0]["Polish"].ToString()
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Fluorescence: ") @dtOrderDetails.Rows[0]["Flourescence"].ToString()
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Measurements: ") @dtOrderDetails.Rows[0]["Measurements"].ToString().Replace("*","x")
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("LAB: ") @dtOrderDetails.Rows[0]["Lab"].ToString()
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Cert#: ") @dtOrderDetails.Rows[0]["CertificateNumber"].ToString()
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("LOT: ") @dtOrderDetails.Rows[0]["LotNumber"].ToString()
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Symmetry: ") @dtOrderDetails.Rows[0]["Symmetry"].ToString()
+                            </div>
+                            <div class="form-group heading">
+                                PRICE
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Diamond Price: ") @dtOrderDetails.Rows[0]["DiamondPrice"].ToString()
+                            </div>
+                            @*<div class="form-group">
+                                @Html.Label("Design Price: ") @dtOrderDetails.Rows[0]["DesignPrice"].ToString()
+                            </div>*@
+                            @if (!Convert.ToBoolean(dtOrderDetails.Rows[0]["IsFullPayment"]))
+                            {
+                                <div class="form-group heading">
+                                    DEPOSIT ONLY TO CONFIRM AVAILABILITY
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Availability Deposit Taken: ") @dtOrderDetails.Rows[0]["AvailabilityDepositToken"].ToString()
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Balance Due: ") @dtOrderDetails.Rows[0]["BalanceDue"].ToString()
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Date Paid: ") @dtOrderDetails.Rows[0]["DatePaid"].ToString()
+                                </div>
+                                @*<div class="form-group">
+                                    @Html.Label("Date to be Paid: ") @dtOrderDetails.Rows[0]["DateToBePaid"].ToString()
+                                </div>*@
+                                }
+                            else
+                            {
+                                <div class="form-group  heading">
+                                    FULL PAYMENT
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Date Diamond Paid in Full: ") @dtOrderDetails.Rows[0]["DateDiamondPaidInFull"].ToString()
+                                </div>
+                                @*<div class="form-group">
+                                    @Html.Label("Date Order Paid in Full: ") @dtOrderDetails.Rows[0]["DateOrderPaidInFull"].ToString()
+                                </div>*@
+                                <div class="form-group">
+                                    @Html.Label("Amount $: ") @dtOrderDetails.Rows[0]["FullAmount"].ToString()
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Comment: ") @dtOrderDetails.Rows[0]["Comment"].ToString()
+                                </div>
+                            }
+                            <div class="form-group">
+                                <div class="payment-row">
+                                    @if (Convert.ToBoolean(dtOrderDetails.Rows[0]["IsBankTransfer"]) || Convert.ToBoolean(dtOrderDetails.Rows[0]["IsCreditCard"]) || Convert.ToBoolean(dtOrderDetails.Rows[0]["IsCash"]) || Convert.ToBoolean(dtOrderDetails.Rows[0]["IsOther"]))
+                                    {
+                                        @Html.Label("Full Payment paid via")
+                                    }
+                                    @if (Convert.ToBoolean(dtOrderDetails.Rows[0]["IsBankTransfer"]))
+                                    {
+                                        <div class="che-box">
+                                            <span>Bank Transfer</span>
+                                        </div>
+                                    }
+                                    @if (Convert.ToBoolean(dtOrderDetails.Rows[0]["IsCreditCard"]))
+                                    {
+                                        <div class="che-box">
+                                            <span>Credit Card</span>
+                                        </div>
+                                    }
+                                    @if (Convert.ToBoolean(dtOrderDetails.Rows[0]["IsCash"]))
+                                    {
+                                        <div class="che-box">
+                                            <span>Cash</span>
+                                        </div>
+                                    }
+                                    @if (Convert.ToBoolean(dtOrderDetails.Rows[0]["IsOther"]))
+                                    {
+                                        <div class="che-box">
+                                            <span>Other</span>
+                                        </div>
+                                    }
+                                    <div class="cl"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @try
+                                {
+                                    bool IsClientViewing = Convert.ToBoolean(dtOrderDetails.Rows[0]["IsClientViewing"]);
+
+                                    @Html.Label("CLIENT VIEWING: ")
+                                    if (IsClientViewing)
+                                    {
+                                        @Html.Raw("Yes")
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw("No")
+                                    }
+
+                                }
+                                catch
+                                {
+
+                                }
+
+                            </div>
+                            <div class="form-group">
+                                @try
+                                {
+                                    bool IsCertificateViewdByClient = Convert.ToBoolean(dtOrderDetails.Rows[0]["IsCertificateViewdByClient"]);
+
+                                    @Html.Label("CERTIFICATE VIEWED BY CLIENT: ")
+                                    if (IsCertificateViewdByClient)
+                                    {
+                                        @Html.Raw("Yes")
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw("Not Important")
+                                    }
+
+                                }
+                                catch
+                                {
+
+                                }
+
+                            </div>
+                        </div>
+                        <div class="box-footer" style="padding-left:300px;">
+                            <a href="@Url.Content("~/secureadmin/report/order")" class="btn btn-default">Back</a>
+                        </div>
+                    }
+                }
+
+            }
+        </div>
+    </div>
+</section>

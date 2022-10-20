@@ -1,0 +1,200 @@
+﻿@model Canturi.Models.BusinessEntity.Admin.MarkUpModels
+@using ASPRazorWebGridSample.UI;
+@{
+    ViewBag.Title = "Manage MarkUp";
+    Layout = "~/Areas/SecureAdmin/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles
+{
+    <link href="@Url.Content("~/Areas/SecureAdmin/Content/plugins/datatables/dataTables.bootstrap.css")" rel="stylesheet" type="text/css" />
+}
+<section class="content-header">
+    <h1>
+        Manage MarkUp
+        <small>Control panel</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Content("~/SecureAdmin/")"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Manage MarkUp</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div id="result"></div>
+    @using (Ajax.BeginForm("Index", "MarkUp", new AjaxOptions
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.InsertBefore,
+        UpdateTargetId = "result",
+        OnSuccess = "FnMarkupSubmitted(data)",
+        OnBegin = "FnMarkupOnBegin()"
+
+    }))
+    {
+        <div class="row">
+            <div class="nav-tabs-custom">
+                <div class="tab-content">
+                    <div class="tab-pane active">
+                        <div class="col-xs-12">
+                            <div class="box">
+                                <div class="box-body table-responsive" style=" background: #f2f2f2; border: #f4f4f4 1px solid;padding: 14px 2px 27px 33px;">
+                                    <table class="markup-form">
+                                        <tr>
+                                            <td colspan="6" style="color:red; font-weight:normal">
+                                                @Html.HiddenFor(m => m.MarkUpId)
+                                                @Html.ValidationSummary()
+                                            </td>
+                                        </tr>
+                                        <tr class="heading">
+                                            <td colspan="2" style="width:250px">Price Range</td>
+                                            <td colspan="2" style="width:280px">Mark up (%)</td>
+                                            <td style="width:115px">Tax (%)</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span>$</span>@Html.TextBoxFor(m => m.PriceFrom)</td>
+                                            <td><span>-$</span>@Html.TextBoxFor(m => m.PriceTo)</td>
+                                            <td>@Html.TextBoxFor(m => m.MarkUpPercentage)<span>%</span></td>
+                                            <td><span>+</span><span>$</span>@Html.TextBoxFor(m => m.MarkUpAmount)</td>
+                                            <td>@Html.TextBoxFor(m => m.MarkUpTax)</td>
+                                            <td align="right">
+                                                <div>
+                                                    <input type="submit" value="Submit" class="btn btn-primary" />
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @*<tr style="font-size:10px; font-weight:normal"; text-align:center">
+                                            <td>
+                                                @Html.HiddenFor(m => m.MarkUpId)
+                                                @Html.ValidationMessageFor(m => m.PriceFrom)
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(m => m.PriceTo)
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(m => m.MarkUpPercentage)
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(m => m.MarkUpAmount)
+                                            </td>
+                                            <td colspan="2">
+                                                @Html.ValidationMessageFor(m => m.MarkUpTax)
+                                            </td>
+
+                                        </tr>*@
+                                    </table>
+
+                                </div>
+                                <div class="box-body table-responsive">
+                                    <div id="divMarkUp">
+                                        @Html.Raw(Canturi.Web.Areas.SecureAdmin.Controllers.MarkUpController.GetMarkUpHtml())
+                                    </div>
+                                    <script type="text/javascript">
+                                        function ConfirmDelete() {
+                                            return confirm("Are you sure you want to delete markup?");
+                                        }
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="cl">
+                </div>
+            </div>
+        </div>
+    }
+</section>
+@section scripts{
+    <script src="@Url.Content("~/Areas/SecureAdmin/Content/plugins/jQuery/jQuery-2.1.4.min.js")"></script>
+    <script src="@Url.Content("~/Areas/SecureAdmin/Content/plugins/datatables/jquery.dataTables.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Areas/SecureAdmin/Content/plugins/datatables/dataTables.bootstrap.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Areas/SecureAdmin/Content/js/AdminLTE/app.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")"></script>
+    <link rel="stylesheet" href="@Url.Content("~/Content/FrontEnd/sweetalert/sweetalert.css")" />
+    <script src="@Url.Content("~/Content/FrontEnd/sweetalert/sweetalert-dev.js")"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#activeTable').DataTable({
+                "paging": false,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": false,
+                "pageLength": 2000
+
+            });
+            //$('#in-activeTable').dataTable();
+        });
+
+        function FnMarkupOnBegin() {
+            //sweetAlert("", "begin", "error");
+            //alert("begin");
+        }
+        function FnMarkupSubmitted(data) {
+            if (data.msg == "ok") {
+                $("#MarkUpId").val('');
+                $("#PriceFrom").val('');
+                $("#PriceTo").val('');
+                $("#MarkUpPercentage").val('');
+                $("#MarkUpAmount").val('');
+                $("#MarkUpTax").val('');
+                $("#divMarkUp").html(data.html);
+                sweetAlert("", "" + data.data + "", "success");
+            }
+            else {
+                sweetAlert("", "" + data.data + "", "error");
+            }
+        }
+
+        function FnMarkupEdit(mId) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("FnGetMarkupById", "MarkUp")',
+                data: "mId=" + mId,
+                cache: false,
+                success: function (data) {
+                    if (data.msg == "ok") {
+                        $("#MarkUpId").val(data.model.MarkUpId);
+                        $("#PriceFrom").val(data.model.PriceFrom);
+                        $("#PriceTo").val(data.model.PriceTo);
+                        $("#MarkUpPercentage").val(data.model.MarkUpPercentage);
+                        $("#MarkUpAmount").val(data.model.MarkUpAmount);
+                        $("#MarkUpTax").val(data.model.MarkUpTax);
+                    }
+                    else {
+                        sweetAlert("", "" + data.data + "", "error");
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    sweetAlert("", "" + jqXHR.responseText + "", "error");
+                }
+            });
+        }
+
+        function FnMarkupDelete(mId) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("FnMarkupDelete", "MarkUp")',
+                data: "mId=" + mId,
+                cache: false,
+                success: function (data) {
+                    if (data.msg == "ok") {
+                        $("#divMarkUp").html(data.data);
+                        sweetAlert("", "Deleted successfully...!", "success");
+                    }
+                    else {
+                        sweetAlert("", "" + data.data + "", "error");
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    sweetAlert("", "" + jqXHR.responseText + "", "error");
+                }
+            });
+        }
+    </script>
+}

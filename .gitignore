@@ -1,0 +1,17 @@
+**/bin/*
+
+**/obj/*
+
+bin/*
+*/bin/*
+obj/*
+*/obj/*
+*/FileUploads/*
+*/obj/Debug/*
+*/bin/Debug/*
+*/obj/Release/*
+*/bin/Release/*
+*/obj/Debug/*
+.vs/*
+*/bin/Release/Publish/*
+*.csv

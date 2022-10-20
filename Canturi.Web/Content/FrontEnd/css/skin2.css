@@ -1,0 +1,22 @@
+/*.blue{border:1px solid #ddd;}*/
+.blue .divider{display:none}
+.blue .arrow{width:27px;height:27px; margin-top:-14px; display:none;}
+.blue .arrow:hover{background-position:0 100%;}
+.blue .ddTitle{color:#b0b0b0; background:#111 url(../images/price-icon.png) no-repeat 90% 50%;; border:#2b2b2b 1px solid; padding:7px 15px;}
+.blue .ddTitle .ddTitleText{/*padding:10px 20px 10px 5px;*/ font:normal 16px/22px 'robotolight'; text-transform: uppercase;}
+.blue .ddTitle .ddTitleText .ddTitleText{padding:0;}
+.blue .ddTitle .description{font-size:12px; color:#666}
+.blue .ddTitle .ddTitleText img{padding-right:5px;}
+.blue .ddChild{border:1px solid #c3c3c3; background-color:#fff; left:0px;}
+.blue .ddChild li{padding:7px 16px; background-color:#fff; border-bottom:1px solid #c3c3c3;}
+.blue .ddChild li:last-child {border-bottom:none;}
+.blue .ddChild li .description{color:#666;}
+.blue .ddChild li .ddlabel{color:#333; font:normal 16px/22px 'robotolight'; text-transform: uppercase;}
+.blue .ddChild li.hover{background-color:#000;}
+.blue .ddChild li.hover span {color:#fff;}
+.blue .ddChild li img{padding:0 6px 0 0;}
+.blue .ddChild li.optgroup{padding:0;}
+.blue .ddChild li.optgroup .optgroupTitle{padding:0 5px; font-weight:bold; font-style:italic}
+.blue .ddChild li.optgroup ul li{padding:5px 5px 5px 15px}
+.blue .ddChild li.selected{background-color:#292929; color:#fff}
+.blue .ddChild li.selected .ddlabel{color:#fff;}

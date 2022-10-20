@@ -1,0 +1,107 @@
+﻿<!-- diamond box -->
+<div class="diamond-section">
+    <!-- breadcrumb box -->
+    <div class="breadcum">
+        <ul>
+            <li><a href="@Url.Content("~/DiamondSearch")">BACK TO SEARCH RESULTS</a></li>
+            <li>
+                Page Not Found
+            </li>
+        </ul>
+        <div class="cl"></div>
+    </div>
+    <!-- breadcrumb box end -->
+    <div class="cl"></div>
+</div>
+<!-- range box -->
+<div class="range-section">
+    <div class="detail-section pageNotFound">
+        <div class="midarea">
+
+            <div class="cl"></div>
+
+            <div class="not-found-container">
+                <div class="not-heading">
+                    <span>WE COULDN'T FIND YOUR PAGE! <b>(404 ERROR)</b></span>
+                    <p style="color: #000 !important">
+                        Unfortunately, the page you've requested cannot be displayed. It appears that you've
+                        lost your way either through an outdated link or a typo on the page you were trying
+                        to reach.
+                    </p>
+                </div>
+
+                <div class="not-f-text">
+                    Please feel free to return to the <a href="@Url.Content("~/")">Home page</a>
+                    or use the search box in the upper
+                    <br>
+                    area of the page to find the information you were looking for.
+                    <br>
+                    We are very sorry for any inconvenience.
+
+                </div>
+                <div class="cl">
+                </div>
+            </div>
+            <div class="cl"></div>
+
+
+        </div>
+        <div class="cl"></div>
+    </div>
+
+    <div class="cl"></div>
+</div>
+<!-- middle section end -->
+@section Styles{
+    <link rel="stylesheet" type="text/css" media="screen" href="@Url.Content("~/Content/FrontEnd/css/custom-input.css")" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+    <style type="text/css">
+        .input-validation-error {
+            border-color: Red !important;
+        }
+    </style>
+}
+@section CurrancyScripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //ddlCurrancy on change
+            $("#ddlCurrancy").change(function () {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("FnChangeCurrancy", "Common")',
+                    data: "selectedCurrancy=" + this.value,
+                    cache: false,
+                    success: function (data) {
+                        window.location = '@Request.RawUrl';
+                        //FnSearchDiamond();
+                        //BindSelection('', '', '');
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        //alert(jqXHR.responseText);
+                    }
+                });
+            });
+
+        });
+        function FnSearch() {
+            if ($("#txtSearchByLot").val().trim().length != 0) {
+                $("#hdnSearchKeyWord").val($("#txtSearchByLot").val());
+                //FnSearchDiamond();
+                window.location = '@Url.Content("~/DiamondSearch?q=")' + $("#txtSearchByLot").val();
+            }
+            else {
+                sweetAlert("", "Please enter lot number...!", "error");
+            }
+            return false;
+        }
+    </script>
+}
+@section scripts{
+    <script src="@Url.Content("~/Content/FrontEnd/js/classie.js")"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")"></script>
+
+}

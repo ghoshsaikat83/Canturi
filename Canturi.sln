@@ -1,0 +1,90 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30523.141
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Canturi.Web", "Canturi.Web\Canturi.Web.csproj", "{352DFCBC-36A1-4221-BF84-DE9C29F7357A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentaion", "Presentaion", "{4EE22458-AC2E-49C6-AA06-B89089C33B3B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BusinessModels", "BusinessModels", "{E7A9137C-548E-4C5B-BB88-3922D73807DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Canturi.Models", "Canturi.Models\Canturi.Models.csproj", "{7CB660F3-4A55-410E-B700-954CB65C4066}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{4F13DF18-02E5-40D9-A149-D8AEB1FB083C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Canturi.RapnetDataService", "Canturi.RapnetDataService\Canturi.RapnetDataService.csproj", "{AEAF33B7-06B5-41FF-B0AE-7061FAD469B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Canturi.JBBrosDataService", "Canturi.JBBrosDataService\Canturi.JBBrosDataService.csproj", "{24996C7A-4D20-4FCD-BF22-CAFE77FA5FB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Canturi.CDINESH", "Canturi.CDINESH\Canturi.CDINESH.csproj", "{60E7FA9A-43BC-4363-9EF1-B876C7BC055D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Canturi.SunriseService", "Canturi.SunriseService\Canturi.SunriseService.csproj", "{D9662784-8126-4B16-90F2-8AE537B98452}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Canturi.KiranService", "Canturi.KiranService\Canturi.KiranService.csproj", "{AD1DFA9E-FD61-40E4-A7D6-4D4F994F3BE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Canturi.DharmService", "Canturi.DharmService\Canturi.DharmService.csproj", "{163FD47B-4D79-44BF-BF4E-B288A0C76188}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Canturi.GlowstarService", "Canturi.GlowstarService\Canturi.GlowstarService.csproj", "{2A46E982-F6A0-4809-A6B8-CA4883F3837F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{352DFCBC-36A1-4221-BF84-DE9C29F7357A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{352DFCBC-36A1-4221-BF84-DE9C29F7357A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{352DFCBC-36A1-4221-BF84-DE9C29F7357A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{352DFCBC-36A1-4221-BF84-DE9C29F7357A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CB660F3-4A55-410E-B700-954CB65C4066}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CB660F3-4A55-410E-B700-954CB65C4066}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CB660F3-4A55-410E-B700-954CB65C4066}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CB660F3-4A55-410E-B700-954CB65C4066}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEAF33B7-06B5-41FF-B0AE-7061FAD469B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEAF33B7-06B5-41FF-B0AE-7061FAD469B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEAF33B7-06B5-41FF-B0AE-7061FAD469B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEAF33B7-06B5-41FF-B0AE-7061FAD469B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24996C7A-4D20-4FCD-BF22-CAFE77FA5FB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24996C7A-4D20-4FCD-BF22-CAFE77FA5FB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24996C7A-4D20-4FCD-BF22-CAFE77FA5FB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24996C7A-4D20-4FCD-BF22-CAFE77FA5FB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60E7FA9A-43BC-4363-9EF1-B876C7BC055D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60E7FA9A-43BC-4363-9EF1-B876C7BC055D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60E7FA9A-43BC-4363-9EF1-B876C7BC055D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60E7FA9A-43BC-4363-9EF1-B876C7BC055D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9662784-8126-4B16-90F2-8AE537B98452}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9662784-8126-4B16-90F2-8AE537B98452}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9662784-8126-4B16-90F2-8AE537B98452}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9662784-8126-4B16-90F2-8AE537B98452}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD1DFA9E-FD61-40E4-A7D6-4D4F994F3BE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD1DFA9E-FD61-40E4-A7D6-4D4F994F3BE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD1DFA9E-FD61-40E4-A7D6-4D4F994F3BE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD1DFA9E-FD61-40E4-A7D6-4D4F994F3BE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{163FD47B-4D79-44BF-BF4E-B288A0C76188}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{163FD47B-4D79-44BF-BF4E-B288A0C76188}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{163FD47B-4D79-44BF-BF4E-B288A0C76188}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{163FD47B-4D79-44BF-BF4E-B288A0C76188}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A46E982-F6A0-4809-A6B8-CA4883F3837F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A46E982-F6A0-4809-A6B8-CA4883F3837F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A46E982-F6A0-4809-A6B8-CA4883F3837F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A46E982-F6A0-4809-A6B8-CA4883F3837F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{352DFCBC-36A1-4221-BF84-DE9C29F7357A} = {4EE22458-AC2E-49C6-AA06-B89089C33B3B}
+		{7CB660F3-4A55-410E-B700-954CB65C4066} = {E7A9137C-548E-4C5B-BB88-3922D73807DA}
+		{AEAF33B7-06B5-41FF-B0AE-7061FAD469B9} = {4F13DF18-02E5-40D9-A149-D8AEB1FB083C}
+		{24996C7A-4D20-4FCD-BF22-CAFE77FA5FB3} = {4F13DF18-02E5-40D9-A149-D8AEB1FB083C}
+		{60E7FA9A-43BC-4363-9EF1-B876C7BC055D} = {4F13DF18-02E5-40D9-A149-D8AEB1FB083C}
+		{D9662784-8126-4B16-90F2-8AE537B98452} = {4F13DF18-02E5-40D9-A149-D8AEB1FB083C}
+		{AD1DFA9E-FD61-40E4-A7D6-4D4F994F3BE5} = {4F13DF18-02E5-40D9-A149-D8AEB1FB083C}
+		{163FD47B-4D79-44BF-BF4E-B288A0C76188} = {4F13DF18-02E5-40D9-A149-D8AEB1FB083C}
+		{2A46E982-F6A0-4809-A6B8-CA4883F3837F} = {4F13DF18-02E5-40D9-A149-D8AEB1FB083C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EAAA6AD5-9846-456F-B5F4-BA2EA4F611F9}
+	EndGlobalSection
+EndGlobal

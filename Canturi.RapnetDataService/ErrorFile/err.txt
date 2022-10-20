@@ -1,0 +1,14 @@
+﻿Successfully Inserting Daimond Procedure - 8/22/2017 11:58:20 AM
+KapuGems Start - 8/22/2017 11:58:20 AM
+Successfully Inserting Kapu Gems Daimond Procedure - 8/22/2017 11:58:26 AM
+Successfully Inserting Daimond Procedure - 8/22/2017 12:06:41 PM
+KapuGems Start - 8/22/2017 12:06:41 PM
+Successfully Inserting Kapu Gems Daimond Procedure - 8/22/2017 12:06:47 PM
+Service start on : 8/29/2017 6:30:29 PM
+System.Web.Services.Protocols.SoapException: Server was unable to process request. ---> System.Exception: There was an error with this request
+   at RetailFeed.GetDiamonds(Shapes Shape, Double SizeFrom, Double SizeTo, Colors ColorFrom, Colors ColorTo, Clarities ClarityFrom, Clarities ClarityTo, Cuts CutFrom, Cuts CutTo, Double PriceFrom, Double PriceTo, Int32 Page, Int32 PageSize, Int32& DiamondsFound)
+   --- End of inner exception stack trace ---
+Service start on : 8/31/2017 12:41:44 PM
+Service start on : 8/31/2017 12:43:19 PM
+Error on Function Inserting Daimond - 8/31/2017 12:44:17 PM - Trying to pass a table-valued parameter with 28 column(s) where the corresponding user-defined table type requires 32 column(s). - .Net SqlClient Data Provider
+Service end on : 8/31/2017 12:44:17 PM

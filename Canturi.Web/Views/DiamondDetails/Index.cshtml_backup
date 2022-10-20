@@ -1,0 +1,764 @@
+﻿@model Canturi.Models.BusinessEntity.FrontEnd.DiamondDetailModels
+@using Canturi.Models.BusinessEntity.FrontEnd;
+@using Canturi.Models.BusinessHelper.CommonHelper;
+<!-- diamond box -->
+<div class="diamond-section">
+    <!-- breadcrumb box -->
+    <div class="breadcum">
+        <ul>
+            <li><a href="javascript:window.history.back()">BACK TO HOMEPAGE</a></li>
+            <li>
+                @Model.DiamondName
+            </li>
+        </ul>
+        <div class="cl"></div>
+    </div>
+    <!-- breadcrumb box end -->
+    <div class="cl"></div>
+</div>
+<!-- range box -->
+<div class="range-section">
+    <div class="detail-section">
+        <div class="detail-section-lft">
+            <div class="detail-img">
+                @{
+                    string[] strShapes = { "CUSHION", "PRINCESS", "RADIANT" };
+                    string strDiamondImg = Url.Content("~/Content/FrontEnd/images/Diamonds/large/no-image.png");
+
+                    string diamondShape = Model.Shape.ToUpper();
+                    if (Model.Shape.ToUpper().Contains("CUSHION"))
+                    {
+                        diamondShape = "CUSHION";
+                    }
+                    if (Model.Shape.ToUpper().Contains("PRINCESS"))
+                    {
+                        diamondShape = "PRINCESS";
+                    }
+                    if (Model.Shape.ToUpper().Contains("RADIANT"))
+                    {
+                        diamondShape = "RADIANT";
+                    }
+                    if (System.IO.File.Exists(Server.MapPath("~/Content/FrontEnd/images/Diamonds/large/") + diamondShape.ToLower().Trim() + ".png"))
+                    {
+                        strDiamondImg = Url.Content("~/Content/FrontEnd/images/Diamonds/large/") + diamondShape.ToLower().Trim() + ".png";
+                    }
+                    @Html.Raw("<img src=\"" + strDiamondImg + "\" alt=\"" + diamondShape + "\" title=\"" + diamondShape + "\" />")
+                }
+
+                <span class="title">Sample Photo</span>
+            </div>
+        </div>
+        <div class="detail-section-rgt">
+            <h2>
+                @Model.DiamondName
+            </h2>
+            <span>PRICE &nbsp;&nbsp;:</span>
+            <h3>
+                @{
+                    string totalPrice = "";
+                    try
+                    {
+                        totalPrice = Math.Round(Convert.ToDecimal(Model.TotalAmount), 2).ToString("G29");
+                    }
+                    catch
+                    {
+
+                    }
+                    if (UserSessionData.Currency.ToLower() == "aud")
+                    {
+                        @Html.Raw(" AUD $" + totalPrice + "<small>Inclusive of GST</small>")
+                    }
+                    else if (UserSessionData.Currency.ToLower() == "euro")
+                    {
+                        //+ "<small>Inclusive of GST</small>"
+                        @Html.Raw(" €" + totalPrice)
+                    }
+                    else if (UserSessionData.Currency.ToLower() == "usd")
+                    {
+                        //+ "<small>Inclusive of GST</small>"
+                        @Html.Raw("USD $" + totalPrice)
+                    }
+                    else
+                    {
+                        @Html.Raw(" $" + totalPrice + "<small>Inclusive of GST</small>")
+                    }
+
+                }
+
+            </h3>
+            <div class="cl"></div>
+        </div>
+        <div class="cl"></div>
+        <div class="detail-section-bott">
+            <ul>
+                @{
+                    //if (Model.Type.ToString().ToLower() != "3")
+                    //{
+                    if (Model.Type.ToString().ToLower() == "1" || Model.Type.ToString().ToLower() == "9" || Model.Type.ToString().ToLower() == "11" || Model.Type.ToString().ToLower() == "12")
+                    {
+                        if (Model.HasCertFile)
+                        {
+                            <li class="view-btn">
+                                <a href="http://technet.rapaport.com/http/certs/GetCertificate1.aspx?diamondid=@Model.DiamondId" target="_blank">
+                                    <span><img src="@Url.Content("~/Content/FrontEnd/images/view-icon.png")" alt="" title="" /></span>VIEW CERTIFICATE
+                                </a>
+                            </li>
+                        }
+                    }
+
+                    else if (Model.Type.ToString().ToLower() == "3")
+                    {
+                        if (!String.IsNullOrEmpty(Model.CertURL))
+                        {
+                            <li class="view-btn">
+                                @*<a href="@Html.Raw("ttps://www.venusjewel.com/cert/GIA")@Model.LotNumber@Html.Raw(".pdf")" target="_blank">*@
+                                <a href="@Html.Raw(Model.CertURL)" target="_blank">
+                                    <span><img src="@Url.Content("~/Content/FrontEnd/images/view-icon.png")" alt="" title="" /></span>VIEW CERTIFICATE
+                                </a>
+                            </li>
+                        }
+                    }
+                    else if (Model.Type.ToString().ToLower() == "2")
+                    {
+                        if (!String.IsNullOrEmpty(Model.Cert))
+                        {
+                            <li class="view-btn">
+                                <a href="@Html.Raw("https://websvr.jbbros.com/Certi/GIA/")@Model.LotNumber@Html.Raw(".jpg")" target="_blank">
+                                    <span><img src="@Url.Content("~/Content/FrontEnd/images/view-icon.png")" alt="" title="" /></span>VIEW CERTIFICATE
+                                </a>
+                            </li>
+                        }
+                    }
+                    else if (Model.Type.ToString().ToLower() == "5")
+                    {
+                        if (!String.IsNullOrEmpty(Model.Cert))
+                        {
+                            <li class="view-btn">
+                                <a href="@Html.Raw("https://viewer.feedcenter.net/Certs/DVASH/")@Model.Cert@Html.Raw(".pdf")" target="_blank">
+                                    <span><img src="@Url.Content("~/Content/FrontEnd/images/view-icon.png")" alt="" title="" /></span>VIEW CERTIFICATE
+                                </a>
+                            </li>
+                        }
+                    }
+                    else if (Model.Type.ToString().ToLower() == "6")
+                    {
+                        if (!String.IsNullOrEmpty(Model.Cert))
+                        {
+                            <li class="view-btn">
+                                <a href="@Html.Raw("http://diamanti.s3.amazonaws.com/certificates/")@Model.Cert@Html.Raw(".jpg")" target="_blank">
+                                    <span><img src="@Url.Content("~/Content/FrontEnd/images/view-icon.png")" alt="" title="" /></span>VIEW CERTIFICATE
+                                </a>
+                            </li>
+                        }
+                    }
+                    else if (Model.Type.ToString().ToLower() == "7")
+                    {
+                        if (!String.IsNullOrEmpty(Model.Cert))
+                        {
+                            <li class="view-btn">
+                                <a href="@Html.Raw("http://52.6.229.216/CertiImages/" + Model.Cert+".pdf")" target="_blank">
+                                    <span><img src="@Url.Content("~/Content/FrontEnd/images/view-icon.png")" alt="" title="" /></span>VIEW CERTIFICATE
+                                </a>
+                            </li>
+                        }
+                    }
+                    else if (Model.Type.ToString().ToLower() == "8")
+                    {
+                        if (!String.IsNullOrEmpty(Model.CertURL))
+                        {
+                            <li class="view-btn">
+                                <a href="@Html.Raw(Model.CertURL)" target="_blank">
+                                    <span><img src="@Url.Content("~/Content/FrontEnd/images/view-icon.png")" alt="" title="" /></span>VIEW CERTIFICATE
+                                </a>
+                            </li>
+                        }
+                    }
+                    else if (Model.Type.ToString().ToLower() == "13")
+                    {
+                        if (!String.IsNullOrEmpty(Model.Cert))
+                        {
+                            <li class="view-btn">
+                                <a href="@Html.Raw("http://diamonds.kirangems.com:8080/Picture/" + Model.Cert.Trim() + ".pdf")" target="_blank">
+                                    <span><img src="@Url.Content("~/Content/FrontEnd/images/view-icon.png")" alt="" title="" /></span>VIEW CERTIFICATE
+                                </a>
+                            </li>
+
+                        }
+                    }
+                    else if (Model.Type.ToString().ToLower() == "14")
+                    {
+                        if (!String.IsNullOrEmpty(Model.Cert))
+                        {
+                            <li class="view-btn">
+                                <a href="@Html.Raw("https://elements.ddpl.com/certificate/" + Model.Cert.Trim())" target="_blank">
+                                    <span><img src="@Url.Content("~/Content/FrontEnd/images/view-icon.png")" alt="" title="" /></span>VIEW CERTIFICATE
+                                </a>
+                            </li>
+
+                        }
+                    }
+                    @*else if (Model.Type.ToString().ToLower() == "10")
+            {
+                if (!String.IsNullOrEmpty(Model.Cert))
+                {
+                    <li class="view-btn">
+                        <a href="@Html.Raw("http://www.sunrisediamonds.com.hk/ViewImg.aspx?Loc=H&RefNo=" + Model.LotNumber)" target="_blank">
+                            <span><img src="@Url.Content("~/Content/FrontEnd/images/view-icon.png")" alt="" title="" /></span>VIEW CERTIFICATE
+                        </a>
+                    </li>
+                }
+            }*@
+                    else
+                    {
+                        //bind canturi diamond certificate
+                        string strDiamondCert = "";
+                        if (System.IO.File.Exists(Server.MapPath("~/Content/Uploads/DiamondCertificate/") + Model.Cert))
+                        {
+                            strDiamondCert = Url.Content("~/Content/Uploads/DiamondCertificate/") + Model.Cert;
+                        }
+                        if (!String.IsNullOrEmpty(strDiamondCert))
+                        {
+                            <li class="view-btn">
+                                <a href="@strDiamondCert" target="_blank">
+                                    <span><img src="@Url.Content("~/Content/FrontEnd/images/view-icon.png")" alt="" title="" /></span>VIEW CERTIFICATE
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="view-btn"> &nbsp; </li>
+                        }
+                    }
+                    //
+
+                }
+
+                @if (!string.IsNullOrEmpty(Model.DiamondVideo))
+                {
+                    @*<li class="video-link" id="liVideo"><a href="javascript:void(0)"><span><img src="~/Images/white-video-icon.png" class="video-icon" alt="" title="Watch Video" /></span> Watch Video</a> </li>*@
+                    <li class="video-link" id="liVideo"><a target="_blank" href='@Url.Content("~/Video?id="+Model.DiamondVideo)'><span><img src="~/Images/white-video-icon.png" class="video-icon" alt="" title="Watch Video" /></span> Watch Video</a> </li>
+                    <li class="video-link" id="liEmailVideo"><a href="javascript:void(0)"><span><img src="~/Images/white-mail-icon.png" class="email-icon" alt="" title="Email Video" /></span> Email Video</a> </li>
+                }
+
+                @if (!Model.IsDiamondOrderd)
+                {
+                    <li class="order order-link"><a href="javascript:void(0)">Request an order</a></li>
+                    <li class="request request-link"><a href="javascript:void(0)">REQUEST AVAILABILITY * ENQUIRY ONLY *</a> </li>
+                }
+
+            </ul>
+            <div class="cl"></div>
+        </div>
+        <div class="cl"></div>
+    </div>
+    <!-- detail-section end -->
+    @{
+        if (!Model.IsDiamondOrderd)
+        {
+            Canturi.Models.BusinessEntity.FrontEnd.DiamondDetailModels objDiamondDetailModels = Model as Canturi.Models.BusinessEntity.FrontEnd.DiamondDetailModels;
+
+            objDiamondDetailModels.RequestOrderDetails.FullAmount = totalPrice;
+            Html.RenderPartial("_RequestOrder", objDiamondDetailModels);
+            Html.RenderPartial("_RequestAvailability", objDiamondDetailModels);
+        }
+    }
+
+
+    <div class="diamond-details-section">
+        @Html.HiddenFor(x => x.UrlCode)
+        <div class="diamond-details-box">
+            <h2>DIAMOND DETAILS</h2>
+            @{
+                decimal tmpCarat = 0;
+                try
+                {
+                    tmpCarat = Convert.ToDecimal(Model.Carat);
+                }
+                catch { }
+
+            }
+            <table cellpadding="0" cellspacing="0" width="100%" bgcolor="#f0f0f0">
+                @if (!Model.IsDiamondOrderd)
+                {
+                    <tr id="trLotNumber"><td><span>LOT #</span> <small>:</small><small class="deatil">@Model.LotNumber</small></td></tr>
+                }
+                <tr><td><span>Shape</span> <small>:</small><small class="deatil">@Model.Shape</small></td></tr>
+
+                <tr><td><span>Carat</span> <small>:</small><small class="deatil">@CommonData.FormatDecimal(tmpCarat)</small></td></tr>
+                <tr><td><span>Colour</span> <small>:</small><small class="deatil">@Model.Colour</small></td></tr>
+                <tr><td><span>Clarity</span> <small>:</small><small class="deatil">@Model.Clarity</small></td></tr>
+                @if (Model.Shape.ToUpper() == "ROUND")
+                {
+                    <tr><td><span>Cut</span> <small>:</small><small class="deatil">@Model.Cut</small></td></tr>
+                }
+
+
+                <tr><td><span>Polish</span> <small>:</small><small class="deatil">@Model.Polish</small></td></tr>
+                <tr><td><span>Symmetry</span> <small>:</small><small class="deatil">@Model.Symmetry</small></td></tr>
+                <tr><td><span>Fluorescence</span> <small>:</small><small class="deatil">@Model.Flourescence</small></td></tr>
+                @{
+                    string strEyeClean = "No";
+                    if (Model.Type.ToLower() == "3")
+                    {
+                        if (Model.EyeClean.ToUpper() == "YES")
+                        {
+                            strEyeClean = "Yes";
+                        }
+                        else
+                        {
+                            strEyeClean = "No";
+                        }
+                    }
+                    else if (Model.Type.ToLower() == "1")
+                    {
+                        strEyeClean = "N/A";
+                    }
+                    else
+                    {
+                        if (Model.EyeClean.ToUpper() == "YES" || Model.EyeClean.ToUpper() == "E1")
+                        {
+                            strEyeClean = "Yes";
+                        }
+                    }
+
+                }
+                <tr><td><span>Eye Clean</span> <small>:</small><small class="deatil">@strEyeClean</small></td></tr>
+                @if (!String.IsNullOrEmpty(Model.Depth))
+                {
+                    string depth = "";
+                    try
+                    {
+                        depth = Math.Round(Convert.ToDecimal(Model.Depth), 2).ToString("G29"); ;
+                    }
+                    catch
+                    {
+
+                    }
+                    depth = depth + " %";
+                    <tr><td><span>Depth</span> <small>:</small><small class="deatil">@depth</small></td></tr>
+                }
+
+                @if (!String.IsNullOrEmpty(Model.Table))
+                {
+                    string strTable = "";
+                    try
+                    {
+                        strTable = Math.Round(Convert.ToDecimal(Model.Table), 2).ToString("G29"); ;
+                    }
+                    catch
+                    {
+
+                    }
+                    strTable = strTable + " %";
+                    <tr><td><span>Table</span> <small>:</small><small class="deatil">@strTable</small></td></tr>
+                }
+
+                <tr><td><span>Ratio</span> <small>:</small><small class="deatil">@Model.Ratio</small></td></tr>
+                <tr><td><span>Lab</span> <small>:</small><small class="deatil">@Model.Lab</small></td></tr>
+                @if (Model.Type == "4")
+                {
+                    <tr><td><span>Cert #</span> <small>:</small><small class="deatil">@Path.GetFileNameWithoutExtension(Model.Cert)</small></td></tr>
+                }
+                else
+                {
+                    <tr><td><span>Cert #</span> <small>:</small><small class="deatil">@Model.Cert</small></td></tr>
+                }
+
+                <tr><td><span>Measurements</span> <small>:</small><small class="deatil">@Model.Measurements mm</small></td></tr>
+            </table>
+        </div>
+    </div>
+    <div class="cl"></div>
+    <div id="videoDialog" title="Video" style="display:none;" video-source='@Model.DiamondVideo'>
+        <center class="mob-vid-msg" style="display:none;">If buttons appear cropped then rotate your device OR <a target="_blank" href='@Url.Content("~/Video?id="+Model.DiamondVideo)'><u>Click here</u></a></center>
+        <center style="width:98%;height:99%">
+            <iframe id="vid-iframe" src="" class="iFrame" scrolling="no" controlsList="nodownload" seamless="seamless"></iframe>  
+        </center>
+    </div>
+    <div id="emailDialog" title="Email Video" style="width:auto;height:auto;display:none;" video-link='@Model.DiamondVideo'>
+        <div >
+            <label>Email:</label>
+            <input id="email" name="email" type="text">
+            <input id="sendEmail" type="button" class="btn-vid" value="Send">
+            <input id="cancel" type="button" class="btn-vid" value="Cancel">
+        </div>
+    </div>
+</div>
+<!-- middle section end -->
+@section ProgressBar{
+    <div id="dvLoader" style="display:none;">
+        <img src="@Url.Content("~/Content/FrontEnd/images/loader.gif")" alt="loader" class="ajax-loader" />
+    </div>
+    <div class="black-overlay"></div>
+}
+
+@section Styles{
+    <link rel="stylesheet" type="text/css" media="screen" href="@Url.Content("~/Content/FrontEnd/css/custom-input.css")" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+    <style type="text/css">
+        .input-validation-error {
+            border-color: Red !important;
+        }
+
+        .ui-dialog .ui-dialog-titlebar-close span {
+            margin: -8.4px !important;
+        }
+
+        .btn-vid {
+            border: 1px solid #0c799e;
+            width: 250px;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .btn-vid:hover {
+            border: 1px solid #666;
+            background: linear-gradient(#9e9e9e 5%,#607d8b 100%) !important;
+            color: #fff;
+        }
+
+        #sendEmail {
+            background: linear-gradient(to bottom,#59d0f8 5%,#49c0e8 100%);
+        }
+
+        #cancel {
+            background: linear-gradient(to bottom,#f85959 5%,#cd0a0a 100%);
+        }
+
+        #email {
+            margin-top: 5px;
+            margin-bottom: 20px;
+            width: 99%;
+            border-radius: 5px;
+            border: 0;
+            padding: 5px 0;
+            padding-left: 10px;
+        }
+
+        .ui-dialog .ui-dialog-content {
+            padding: 2em
+        }
+
+    </style>
+}
+@section CurrancyScripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //ddlCurrancy on change
+            $("#ddlCurrancy").change(function () {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("FnChangeCurrancy", "Common")',
+                    data: "selectedCurrancy=" + this.value,
+                    cache: false,
+                    success: function (data) {
+                        window.location = '@Request.RawUrl';
+                        //FnSearchDiamond();
+                        //BindSelection('', '', '');
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        //alert(jqXHR.responseText);
+                    }
+                });
+            });
+
+        });
+        function FnSearch() {
+            if ($("#txtSearchByLot").val().trim().length != 0) {
+                $("#hdnSearchKeyWord").val($("#txtSearchByLot").val());
+                //FnSearchDiamond();
+                window.location = '@Url.Content("~/DiamondSearch?q=")' + $("#txtSearchByLot").val() + '&s=' + $("#ddlSearchBy").val();
+            }
+            else {
+                sweetAlert("", "Please enter lot number...!", "error");
+            }
+            return false;
+        }
+    </script>
+}
+@section scripts{
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/ui-darkness/jquery-ui.css" rel="stylesheet">
+    <script src="@Url.Content("~/Content/FrontEnd/js/classie.js")"></script>
+    @*ttp://code.jquery.com/ui/1.11.4/jquery-ui.js*@
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js" integrity="sha256-DI6NdAhhFRnO2k51mumYeDShet3I8AKCQf/tf7ARNhI=" crossorigin="anonymous"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")"></script>
+    <script>
+
+        $(function () {
+            $("#txtRequestAvailabilityDate").datepicker({
+                dateFormat: "dd/mm/yy",
+                onSelect: function (dateText, inst) {
+                    $("#spnRequestAvailabilityDueDate").addClass("input--filled");
+                }
+            });
+            $("#txtRequestAvailabilityDate").keypress(function (evt) {
+                return false;
+            });
+            $('#txtRequestAvailabilityDate').bind("cut copy paste", function (e) {
+                e.preventDefault();
+            });
+
+
+
+            $("#due-date").datepicker({
+                dateFormat: "dd/mm/yy",
+                onSelect: function (dateText, inst) {
+                    $("#spndue-date").addClass("input--filled");
+                }
+            });
+            $("#due-date").keypress(function (evt) {
+                return false;
+            });
+            $('#due-date').bind("cut copy paste", function (e) {
+                e.preventDefault();
+            });
+
+            $("#date-paid").datepicker({
+                dateFormat: "dd/mm/yy",
+                onSelect: function (dateText, inst) {
+                    $("#spndate-paid").addClass("input--filled");
+                }
+            });
+            $("#date-paid").keypress(function (evt) {
+                return false;
+            });
+            $('#date-paid').bind("cut copy paste", function (e) {
+                e.preventDefault();
+            });
+
+
+            $("#date-be-paid").datepicker({
+                dateFormat: "dd/mm/yy",
+                onSelect: function (dateText, inst) {
+                    $("#spndate-be-paid").addClass("input--filled");
+                }
+            });
+            $("#date-be-paid").keypress(function (evt) {
+                return false;
+            });
+            $('#date-be-paid').bind("cut copy paste", function (e) {
+                e.preventDefault();
+            });
+
+
+            $("#date-paid-full").datepicker({
+                dateFormat: "dd/mm/yy",
+                onSelect: function (dateText, inst) {
+                    $("#spndate-paid-full").addClass("input--filled");
+                }
+            });
+            $("#date-paid-full").keypress(function (evt) {
+                return false;
+            });
+            $('#date-paid-full').bind("cut copy paste", function (e) {
+                e.preventDefault();
+            });
+
+
+            $("#date-order-full").datepicker({
+                dateFormat: "dd/mm/yy",
+                onSelect: function (dateText, inst) {
+                    $("#spndate-order-full").addClass("input--filled");
+                }
+            });
+            $("#date-order-full").keypress(function (evt) {
+                return false;
+            });
+            $('#date-order-full').bind("cut copy paste", function (e) {
+                e.preventDefault();
+            });
+
+
+
+        });
+    </script>
+    <script>
+        (function () {
+            // trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
+            if (!String.prototype.trim) {
+                (function () {
+                    // Make sure we trim BOM and NBSP
+                    var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+                    String.prototype.trim = function () {
+                        return this.replace(rtrim, '');
+                    };
+                })();
+            }
+
+            [].slice.call(document.querySelectorAll('input.input__field')).forEach(function (inputEl) {
+                // in case the input is already filled..
+                if (inputEl.value.trim() !== '') {
+                    classie.add(inputEl.parentNode, 'input--filled');
+                }
+
+                // events:
+                inputEl.addEventListener('focus', onInputFocus);
+                inputEl.addEventListener('blur', onInputBlur);
+            });
+
+            function onInputFocus(ev) {
+                classie.add(ev.target.parentNode, 'input--filled');
+            }
+
+            function onInputBlur(ev) {
+                if (ev.target.value.trim() === '') {
+                    classie.remove(ev.target.parentNode, 'input--filled');
+                }
+            }
+        })();
+    </script>
+    <script type="text/javascript">
+        function customRadio(radioName) {
+            var radioButton = $('input[name="' + radioName + '"]');
+            $(radioButton).each(function () {
+                $(this).wrap("<span class='custom-radio'></span>");
+                if ($(this).is(':checked')) {
+                    $(this).parent().addClass("selected");
+                }
+            });
+            $(radioButton).click(function () {
+                if ($(this).is(':checked')) {
+                    $(this).parent().addClass("selected");
+                }
+                $(radioButton).not(this).each(function () {
+                    $(this).parent().removeClass("selected");
+                });
+            });
+        }
+        $(document).ready(function () {
+
+            customRadio("yes");
+            customRadio("not-importan");
+            customRadio("IsFullPayment");
+            customRadio("IsClientViewing");
+        })
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".order-link").click(function () {
+                var msg = "<span style=\"font: normal 23px/26px 'robotolight';color: #000;\">CONGRATULATIONS<br> on your diamond selection.<br><br>All diamonds are listed on the global market and are subject to availability and <br> clarity confirmation.<br><br> Your selection will be confirmed within 1 business day.</span>";
+                swal({
+                    title: "",
+                    text: msg,
+                    html: true,
+                    confirmButtonText: "CONTINUE",
+                    showConfirmButton: true,
+                    customWidth: '766px',
+                    customePadding: '10px 87px'
+                },
+                    function () {
+                        $(".request-detail").hide();
+                        $(".order-detail").slideToggle();
+                        $('html, body').animate({
+                            scrollTop: $(".order-detail").offset().top
+                        }, 2000);
+                    });
+            });
+        })
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".request-link").click(function () {
+                $(".order-detail").hide();
+                $(".request-detail").slideToggle();
+                $('html, body').animate({
+                    scrollTop: $(".request-detail").offset().top
+                }, 2000);
+            });
+        })
+    </script>
+    <script type="text/javascript">
+        /*$("#liVideo").click(function () {
+            //debugger;
+            var src = $("#videoDialog").attr('video-source');
+            
+            var height = $(window).height();
+            var width = $(window).width();
+            $("#vid-iframe").css('display', 'block');
+            $("#vid-iframe").css('height', height);
+            $("#vid-iframe").css('width', width);
+            
+            setTimeout(function () {
+                //$('.Vision360').css('height', '100%!important');                
+                $("#vid-iframe").attr('src', src);
+                //alert('applied');
+            }, 1000);
+            $("#videoDialog").dialog({
+                modal: true,
+                width: width - 100,
+                height: height - 100,
+                draggable: false,
+                close: function (event, ui) {
+                    $("#vid-iframe").attr('src', "");
+                }
+            });
+        });
+        */
+        //Email Link code
+        $("#liEmailVideo").click(function () {
+            //debugger;
+            var src = $("#emailDialog").attr('video-link');
+
+
+            $("#emailDialog").dialog({
+                modal: true,
+                width: 550,
+                height: 200,
+                resizable: false,
+                draggable: false,
+                close: function (event, ui) {
+                    $("#email").val('');
+                }
+            });
+        });
+
+        $("#cancel").click(function (e) {
+            $("#emailDialog").dialog('close');
+        });
+
+            $("#sendEmail").click(function (e) {
+                //debugger;
+                var email = $("#email").val().trim();
+
+            var emailReg = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
+            if (email === '') {
+                sweetAlert("", "Please fill email !", "warning");
+                e.preventDefault();
+            }
+            else if (!(email).match(emailReg)) {
+                sweetAlert("", "Invalid email", "error");
+                e.preventDefault();
+            }
+            else {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("SendVideoLink", "DiamondDetails")',
+                    data: { type: "@Model.Type", lot: "@Model.LotNumber", email },
+                    cache: false,
+                    success: function (data) {
+                        if (data.msg.toLowerCase() == "ok") {
+                            $("#emailDialog").dialog('close');
+                            sweetAlert("Email sent successfully......", "", "success");
+                        }
+                        else {                            
+                            console.log(data);
+                            $("#emailDialog").dialog('close');
+                            sweetAlert("", "" + data.data + "", "error");   // Email not sent
+                        }
+                    },
+                    error: function () {
+                        sweetAlert("", "Error while sending mail", "error");
+                    }
+                });
+            }
+        });
+
+    </script>
+}

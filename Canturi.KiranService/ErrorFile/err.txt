@@ -1,0 +1,9 @@
+﻿WebClient start - 9/12/2017 12:35:26 PM
+WebClient start - 9/12/2017 1:06:13 PM
+WebClient end - 9/12/2017 1:10:23 PM
+Json file save: D:\Projects\Canturi\Canturi.KiranService\JsonData\8e58509e-143c-408c-8b7e-4fae31584f12.json - 9/12/2017 1:10:42 PM
+Successfully Inserting Diamond Procedure - 9/12/2017 1:13:47 PM
+WebClient start - 9/12/2017 6:46:06 PM
+WebClient end - 9/12/2017 6:49:59 PM
+Json file save: D:\Projects\Canturi\Canturi.KiranService\JsonData\a774d00a-64b5-42c5-b45e-2eb07d634333.json - 9/12/2017 6:49:59 PM
+Successfully Inserting Diamond Procedure - 9/12/2017 6:52:02 PM

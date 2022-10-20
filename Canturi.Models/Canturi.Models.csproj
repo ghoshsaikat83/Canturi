@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7CB660F3-4A55-410E-B700-954CB65C4066}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Canturi.Models</RootNamespace>
+    <AssemblyName>Canturi.Models</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BusinessEntity\Admin\CaratSizeSettingModel.cs" />
+    <Compile Include="BusinessEntity\Admin\ChangePasswordModel.cs" />
+    <Compile Include="BusinessEntity\Admin\ConsultantModels.cs" />
+    <Compile Include="BusinessEntity\Admin\DashBoardModels.cs" />
+    <Compile Include="BusinessEntity\Admin\DiamondDetailModels.cs" />
+    <Compile Include="BusinessEntity\Admin\DiamondModels.cs" />
+    <Compile Include="BusinessEntity\Admin\LogOnModels.cs" />
+    <Compile Include="BusinessEntity\Admin\MarkUpModels.cs" />
+    <Compile Include="BusinessEntity\Admin\StoreModel.cs" />
+    <Compile Include="BusinessEntity\Admin\SuppliersVideo.cs" />
+    <Compile Include="BusinessEntity\FrontEnd\CaratSizeSettingModel.cs" />
+    <Compile Include="BusinessEntity\FrontEnd\DiamondDetailModels.cs" />
+    <Compile Include="BusinessEntity\FrontEnd\DiamondModels.cs" />
+    <Compile Include="BusinessEntity\FrontEnd\EmailServerModel.cs" />
+    <Compile Include="BusinessEntity\FrontEnd\JBBrosDiamondModel.cs" />
+    <Compile Include="BusinessEntity\FrontEnd\LogOnModels.cs" />
+    <Compile Include="BusinessEntity\FrontEnd\SaveSelectonModels.cs" />
+    <Compile Include="BusinessEntity\FrontEnd\UserSessionData.cs" />
+    <Compile Include="BusinessHelper\Admin\CaratSizeSettingHelper.cs" />
+    <Compile Include="BusinessHelper\Admin\StoreHelper.cs" />
+    <Compile Include="BusinessHelper\Admin\ConsultantHelper.cs" />
+    <Compile Include="BusinessHelper\Admin\DiamondHelper.cs" />
+    <Compile Include="BusinessHelper\Admin\DiamondOrderHelper.cs" />
+    <Compile Include="BusinessHelper\Admin\MarkUpHelper.cs" />
+    <Compile Include="BusinessHelper\Admin\ReportsHelper.cs" />
+    <Compile Include="BusinessHelper\Admin\RoleHelper.cs" />
+    <Compile Include="BusinessEntity\Admin\RoleModels.cs" />
+    <Compile Include="BusinessEntity\Admin\UserModels.cs" />
+    <Compile Include="BusinessEntity\CommonModels.cs" />
+    <Compile Include="BusinessEntity\StringResourceModel.cs" />
+    <Compile Include="BusinessHelper\Admin\AdminSessionData.cs" />
+    <Compile Include="BusinessHelper\Admin\AdminUserHelper.cs" />
+    <Compile Include="BusinessHelper\Admin\MenuHelper.cs" />
+    <Compile Include="BusinessHelper\Admin\SaveSelectonHelper.cs" />
+    <Compile Include="BusinessHelper\Admin\SettingHelper.cs" />
+    <Compile Include="BusinessHelper\Admin\SupplierHelper.cs" />
+    <Compile Include="BusinessHelper\CommonHelper\AppError.cs" />
+    <Compile Include="BusinessHelper\CommonHelper\CommonData.cs" />
+    <Compile Include="BusinessHelper\CommonHelper\ConvertToCSV.cs" />
+    <Compile Include="BusinessHelper\CommonHelper\EmailSender.cs" />
+    <Compile Include="BusinessHelper\CommonHelper\JBBrosHelper.cs" />
+    <Compile Include="BusinessHelper\CommonHelper\PagerHelper.cs" />
+    <Compile Include="BusinessHelper\CommonHelper\SqlHelper.cs" />
+    <Compile Include="BusinessHelper\CommonHelper\StringResource.cs" />
+    <Compile Include="BusinessHelper\FrontEnd\CaratSizeSettingHelper.cs" />
+    <Compile Include="BusinessHelper\FrontEnd\DiamondHelper.cs" />
+    <Compile Include="BusinessHelper\FrontEnd\DiamondOrderHelper.cs" />
+    <Compile Include="BusinessHelper\FrontEnd\LoginHelper.cs" />
+    <Compile Include="BusinessHelper\FrontEnd\SaveSelectonHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\Grid\ASPRazorWebGrid.cs" />
+    <Compile Include="Utility\Grid\Dynamic.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

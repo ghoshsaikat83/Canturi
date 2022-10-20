@@ -1,0 +1,94 @@
+﻿@model Canturi.Models.BusinessEntity.FrontEnd.EmailServerModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "";
+}
+
+<style type="text/css">
+    .form-group {
+        padding: 20px;
+    }
+
+        .form-group label {
+            width: 200px;
+            float: left;
+        }
+
+        .form-group input {
+            width: 300px;
+            float: left;
+            height: 40px;
+        }
+
+    .box-footer {
+        width: 100%;
+        float: left;
+    }
+
+    button.btn.btn-primary {
+        width: 200px;
+        float: left;
+        height: 30px;
+    }
+</style>
+<div class="col-md-6" style="border:solid #72AFD2 1px">
+    @using (@Html.BeginForm())
+    {
+        <div class="box-body fix-width">
+            <div class="form-group">
+                @Html.Raw(TempData["CommonMessage"])
+            </div>
+            <div class="form-group">
+                @Html.Label("Email To")
+                <span class="asterisk">*</span>
+                @Html.TextBoxFor(m => m.EmailTo, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.EmailTo)
+            </div>
+            <div class="form-group">
+                @Html.Label("From Email")
+                <span class="asterisk">*</span>
+                @Html.TextBoxFor(m => m.FromEmail, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.FromEmail)
+            </div>
+            <div class="form-group">
+                @Html.Label("Sender Display Name")
+                <span class="asterisk">*</span>
+                @Html.TextBoxFor(m => m.SenderDisplayName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.SenderDisplayName)
+            </div>
+            <div class="form-group">
+                @Html.Label("Email Server")
+                <span class="asterisk">*</span>
+                @Html.TextBoxFor(m => m.EmailServer, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.EmailServer)
+            </div>
+            <div class="form-group">
+                @Html.Label("Port")
+                <span class="asterisk">*</span>
+                @Html.TextBoxFor(m => m.Port, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Port)
+            </div>
+            <div class="form-group">
+                @Html.Label("Network UserId")
+                <span class="asterisk">*</span>
+                @Html.TextBoxFor(m => m.NetworkUserId, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.NetworkUserId)
+            </div>
+            <div class="form-group">
+                @Html.Label("Network User Password")
+                <span class="asterisk">*</span>
+                @Html.TextBoxFor(m => m.NetworkUserPassword, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.NetworkUserPassword)
+            </div>
+            <div class="form-group">
+                @Html.Label("EnableSsl")
+                @Html.CheckBoxFor(m => m.EnableSsl)
+            </div>
+            <div class="form-group">
+                <label>&nbsp;</label>
+                <button type="submit" class="btn btn-primary">Test Email Credentials</button>
+            </div>
+        </div>
+    }
+</div>
+

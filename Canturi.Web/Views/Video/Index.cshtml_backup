@@ -1,0 +1,67 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    @*<meta http-equiv="refresh" content="0060; URL=target_page.html">*@
+    <title>Canturi Diamond Video</title>
+    <link href="@Url.Content("~/favicon.ico")" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/FrontEnd/css/style.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/FrontEnd/sweetalert/sweetalert.css")" />
+    @*@RenderSection("Styles", required: false)*@
+    <noscript>
+        <meta http-equiv="refresh" content="0;url=@Url.Content("~/NOJavascript")" />
+    </noscript>
+</head>
+<body>
+    <!-- wrapper -->
+    <div class="wrapper">
+        <!-- header -->
+        <!-- top header box -->
+        <div class="top-header-section">
+            <div class="top-header-box">
+                <!-- logo box -->
+                <div class="logo-box">
+                    <a href="@Url.Content("~/")">
+                        <img src="@Url.Content("~/Content/FrontEnd/images/logo.png")">
+                    </a>
+                    <div class="cl"></div>
+                </div>
+                <div class="cl"></div>
+            </div>
+            <div class="cl"></div>
+        </div>
+        <!-- top header box end -->
+    </div>
+    <div>
+        <div id="videoDialog" title="Video" style="width:auto;height:auto;display:none;" video-source="@ViewBag.URL">
+            <iframe id="vid-iframe" src="" class="iFrame" scrolling="no" controlsList="nodownload" seamless="seamless" @*style="width: 610px;height: 750px;"*@></iframe>
+        </div>
+    </div>
+    <script src="@Url.Content("~/Content/FrontEnd/js/jquery-1.7.1.js")"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //debugger;
+            var src = $("#videoDialog").attr('video-source');
+            /*if (src.match(".mp4$") || src.match(".mov$") || src.match(".ogg$") || src.match(".webm$")) {
+            }
+            else {
+                src = Url.Content("~/Content/Uploads/DiamondVideo/")+src;
+            }*/
+            var height = $(window).height();
+            var width = $(window).width();
+            $("#videoDialog").css('display', 'block');
+            $("#vid-iframe").css('height', height - 60);
+            $("#vid-iframe").css('width', width);
+            $("#vid-iframe").attr('src', src);
+        });
+    </script>
+</body>
+</html>

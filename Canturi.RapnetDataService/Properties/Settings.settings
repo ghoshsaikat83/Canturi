@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Canturi.RapnetDataService.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Canturi_RapnetDataService_com_rapaport_technet_RetailFeed" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://technet.rapaport.com/WebServices/RetailFeed/RetailFeed.asmx</Value>
+    </Setting>
+    <Setting Name="Canturi_RapnetDataService_com_rapaport_technet1_Feed" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://technet.rapaport.com:449/WebServices/RetailFeed/Feed.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

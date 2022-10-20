@@ -1,0 +1,138 @@
+﻿@model Tuple<IEnumerable<Canturi.Models.BusinessEntity.Admin.DiamondModels>, Canturi.Models.BusinessEntity.Admin.DiamondModels>
+@using ASPRazorWebGridSample.UI;
+@{
+    ViewBag.Title = "Manage Diamond";
+    Layout = "~/Areas/SecureAdmin/Views/Shared/_Layout.cshtml";
+}
+@section Styles
+{
+<link href="@Url.Content("~/Areas/SecureAdmin/Content/plugins/datatables/dataTables.bootstrap.css")" rel="stylesheet" type="text/css" />
+    }
+<section class="content-header">
+    <h1>
+        Manage Diamond
+        <small>Control panel</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Content("~/SecureAdmin/Diamond")"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Manage Role</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    @using (Html.BeginForm())
+    {
+        <div class="row">
+            @*box1*@
+            @if (@Model.Item2.IsShowMessage == 1)
+            {
+                if (@Model.Item2.MessageClass.ToLower() == "MsgGreen".ToLower())
+                {
+                    <div class="alert alert-success alert-dismissable">
+                        <i class="fa fa-check"></i>
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                            &times;
+                        </button>
+                        @Model.Item2.Message
+                    </div>
+                }
+                else if (@Model.Item2.MessageClass.ToLower() == "MsgRed".ToLower())
+                {
+                    <div class="alert alert-danger alert-dismissable">
+                        <i class="fa fa-ban"></i>
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                            &times;
+                        </button>
+                        @Model.Item2.Message
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-success alert-dismissable">
+                        <i class="fa fa-check"></i>
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                            &times;
+                        </button>
+                        @Model.Item2.Message
+                    </div>
+                }
+
+
+            }
+            <div class="top-buttons-container">
+                <a href="@Url.Content("~/SecureAdmin/Diamond")" class="btn btn-success">View</a> <a href="@Url.Content("~/SecureAdmin/Diamond/Add")" class="btn btn-info">Add</a>
+            </div>
+            <div class="nav-tabs-custom">
+                @*<ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab_1-1" data-toggle="tab">Active Diamond</a></li>                    
+                </ul>*@
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab_1-1">
+                        <div class="col-xs-12">
+                            <div class="box">
+                                <div class="box-header">
+                                    <h3 class="box-title">
+                                        Diamond List
+                                    </h3>
+                                </div>
+                                <div class="box-body table-responsive">
+                                    @{
+        var activeGrid = new ASPRazorWebGrid(source: Model.Item1, maintainState: false);
+                                    }
+                                    @activeGrid.GetHtml(columns: new ASPRazorWebGridColumn[]{
+                                                activeGrid.CreateColumn(dataField:"SerialNumber",headerText:"S.No.", width:"50px", headerHorizontalAlignment: "center", itemHorizontalAlignment: "center"),
+                                                activeGrid.CreateColumn(dataField: "LotNumber", headerText:"Lot #", canSort: false,headerHorizontalAlignment: "Left", itemHorizontalAlignment: "Left"),
+                                                activeGrid.CreateColumn(dataField: "Shape", headerText:"Shape", canSort: false,headerHorizontalAlignment: "Left", itemHorizontalAlignment: "Left"),
+                                                activeGrid.CreateColumn(dataField: "Carat", headerText:"Carat", canSort: false,headerHorizontalAlignment: "Left", itemHorizontalAlignment: "Left"),
+                                                activeGrid.CreateColumn(dataField: "Color", headerText:"Color", canSort: false,headerHorizontalAlignment: "Left", itemHorizontalAlignment: "Left"),
+                                                activeGrid.CreateColumn(dataField: "Clartiy", headerText:"Clartiy", canSort: false,headerHorizontalAlignment: "Left", itemHorizontalAlignment: "Left"),
+                                                activeGrid.CreateColumn(dataField: "Cut", headerText:"Cut", canSort: false,headerHorizontalAlignment: "Left", itemHorizontalAlignment: "Left"),
+                                                activeGrid.CreateColumn(dataField: "Polish", headerText:"Polish", canSort: false,headerHorizontalAlignment: "Left", itemHorizontalAlignment: "Left"),
+                                                activeGrid.CreateColumn(dataField: "Symmetry", headerText:"Symmetry", canSort: false,headerHorizontalAlignment: "Left", itemHorizontalAlignment: "Left"),
+                                                activeGrid.CreateColumn(headerText:"Action", headerHorizontalAlignment: "center", itemHorizontalAlignment: "center", dataFieldFormat:@<text><a title="Edit" href="@Url.Action("Edit", "Diamond", new { @Id = @item.DiamondId })" class="fa fa-fw fa-edit">
+                                                    </a>&nbsp;| &nbsp;<a title="Delete" onclick="javascript:return ConfirmDelete();" href="@Url.Action("Delete", "Diamond", new { @Id = @item.DiamondId })" class="fa fa-fw fa-trash-o">
+                                                    </a></text>)
+
+                                                },
+tableStyle: "table table-bordered table-hover",
+headerStyle: "head",
+alternatingRowStyle: "alt",
+tableId: "activeTable")
+                                    <script type="text/javascript">
+                                    function ConfirmDelete() {
+                                        return confirm("Are you sure you want to delete Diamond?");
+                                    }
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="cl">
+                </div>
+            </div>
+        </div>
+    }
+</section>
+@section scripts{
+<script src="@Url.Content("~/Areas/SecureAdmin/Content/plugins/jQuery/jQuery-2.1.4.min.js")"></script>
+<script src="@Url.Content("~/Areas/SecureAdmin/Content/plugins/datatables/jquery.dataTables.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Areas/SecureAdmin/Content/plugins/datatables/dataTables.bootstrap.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Areas/SecureAdmin/Content/js/AdminLTE/app.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        
+        $('#activeTable').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": false,
+            "pageLength": 20
+            
+        });
+        //$('#in-activeTable').dataTable();
+    });
+</script>
+    }

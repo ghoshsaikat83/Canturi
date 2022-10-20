@@ -1,0 +1,5 @@
+﻿Error on Inserting Diamond Procedure - 03-02-2020 15:57:50
+Column 'MILKY ' does not belong to table .
+Successfully Inserting Diamond Procedure - 03-02-2020 15:58:38
+Successfully Inserting Diamond Procedure - 13-02-2020 18:13:50
+Successfully Inserting Diamond Procedure - 17-03-2020 14:56:55

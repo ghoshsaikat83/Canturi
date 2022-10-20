@@ -1,0 +1,386 @@
+﻿@model Canturi.Models.BusinessEntity.FrontEnd.DiamondDetailModels
+@using Canturi.Models.BusinessEntity.FrontEnd;
+@using Canturi.Models.BusinessHelper.CommonHelper;
+@*@using (Html.BeginForm("_RequestAvailability", "DiamondDetails"))*@
+<div id="result" style="display:none;"></div>
+@using (Ajax.BeginForm("_RequestAvailability", "DiamondDetails", new AjaxOptions
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.InsertBefore,
+        UpdateTargetId = "result",
+        OnSuccess = "FnRequestAvailabilitySubmitted(data)",
+        OnBegin = "FnRequestAvailabilityOnBegin()"
+
+    }))
+{
+    @Html.HiddenFor(m => m.DiamondId)
+    @Html.HiddenFor(m => m.Type)
+
+    <div class="request-form-section">
+        @{
+    string currancy = "";
+    if (UserSessionData.Currency.ToLower() == "aud")
+    {
+        currancy = "AUD $";
+    }
+    else if (UserSessionData.Currency.ToLower() == "euro")
+    {
+        currancy = "€";
+    }
+    else if (UserSessionData.Currency.ToLower() == "usd")
+    {
+        currancy = "$";
+    }
+    else
+    {
+        currancy = "$";
+    }
+
+  }
+        <div class="request-detail content" @Html.Raw((Model.IsRequestAvailability == true ? "style=\"display:block;\"" : ""))>
+            <!-- result box -->
+            <div class="form-box">
+                <h2>Customer Details</h2>
+                <div class="row">
+                    <div class="colum-left">
+                        <span class="input input--yoshiko">
+                            @Html.TextBoxFor(m => m.RequestAvailabilityDetails.CustomerName, new { @class = "input__field input__field--yoshiko", @id = "customer-name" })
+                            @Html.ValidationMessageFor(x => x.RequestAvailabilityDetails.CustomerName)
+                            <label class="input__label input__label--yoshiko" for="customer-name">
+                                <span class="input__label-content input__label-content--yoshiko star" data-content="Customer Name">Customer Name</span>
+                            </label>
+                        </span>
+                    </div>
+                    <div class="colum-left right">
+                        <span class="input input--yoshiko" id="spnRequestAvailabilityDueDate">
+                            @Html.TextBoxFor(m => m.RequestAvailabilityDetails.DueDate, new { @class = "input__field input__field--yoshiko", @id = "txtRequestAvailabilityDate", })
+                            @Html.ValidationMessageFor(x => x.RequestAvailabilityDetails.DueDate)
+                            <label class="input__label input__label--yoshiko" for="txtRequestAvailabilityDate">
+                                <span class="input__label-content input__label-content--yoshiko star" data-content="Diamond Availability Due Date">Diamond Availability Due Date </span>
+                            </label>
+                        </span>
+                    </div>
+                    @*<div class="colum-left right">
+                        <span class="input input--yoshiko">
+                            @Html.TextBoxFor(m => m.RequestAvailabilityDetails.JcsCustomerNumber, new { @class = "input__field input__field--yoshiko", @id = "jcs-customer" })
+                            @Html.ValidationMessageFor(x => x.RequestAvailabilityDetails.JcsCustomerNumber)
+                            <label class="input__label input__label--yoshiko" for="jcs-customer">
+                                <span class="input__label-content input__label-content--yoshiko star" data-content="JCS Customer #">JCS Customer #</span>
+                            </label>
+                        </span>
+                    </div>*@
+                    <div class="cl"></div>
+                </div>
+                
+                @*<div class="row">
+                    <div class="colum-left">
+                        <span class="input input--yoshiko">
+                            @Html.TextBoxFor(m => m.RequestAvailabilityDetails.OrderNumber, new { @class = "input__field input__field--yoshiko", @id = "order" })
+                            @Html.ValidationMessageFor(x => x.RequestAvailabilityDetails.OrderNumber)
+                            <label class="input__label input__label--yoshiko" for="order">
+                                <span class="input__label-content input__label-content--yoshiko star" data-content="Order #">Order # </span>
+                            </label>
+                        </span>
+                    </div>
+                    <div class="colum-left right">
+                        <span class="input input--yoshiko" id="spnRequestAvailabilityDueDate">
+                            @Html.TextBoxFor(m => m.RequestAvailabilityDetails.DueDate, new { @class = "input__field input__field--yoshiko", @id = "txtRequestAvailabilityDate", })
+                            @Html.ValidationMessageFor(x => x.RequestAvailabilityDetails.DueDate)
+                            <label class="input__label input__label--yoshiko" for="txtRequestAvailabilityDate">
+                                <span class="input__label-content input__label-content--yoshiko star" data-content="Due Date" >Due Date </span>
+                            </label>
+                        </span>
+                    </div>
+                    <div class="cl"></div>
+                </div>*@
+
+                <h2>Diamond Details</h2>
+                <div class="detail-section-left">
+                    <div class="row">
+                        <div class="colum-left">
+                            <small>Readable Only</small>
+                            <span class="input input--yoshiko">
+                                <input type="text" class="input__field input__field--yoshiko" required readonly onclick="choose_le_page();" placeholder="Shape: @Model.Shape" disabled />
+                            </span>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+                    <div class="row">
+                        <div class="colum-left">
+                        <small>Readable Only</small>
+                        <span class="input input--yoshiko">
+                        @{
+                        decimal tmpCarat = 0;
+                        try
+                        {
+                        tmpCarat = Convert.ToDecimal(Model.Carat);
+                        }
+                        catch { }
+
+                        }
+                        <input type="text" class="input__field input__field--yoshiko" required readonly onclick="choose_le_page();" placeholder="Carat: @CommonData.FormatDecimal(tmpCarat)" disabled />
+                        </span>
+                        </div>
+                    
+                    <div class="cl"></div>
+                    </div>
+                    <div class="row">
+                        <div class="colum-left">
+                            <small>Readable Only</small>
+                            <span class="input input--yoshiko">
+                                <input type="text" class="input__field input__field--yoshiko" required readonly onclick="choose_le_page();" placeholder="Colour: @Model.Colour" disabled />
+                            </span>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+                    <div class="row">
+                        <div class="colum-left">
+                            <small>Readable Only</small>
+                            <span class="input input--yoshiko">
+                                <input type="text" class="input__field input__field--yoshiko" required readonly onclick="choose_le_page();" placeholder="Clarity: @Model.Clarity" disabled />
+                            </span>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+                    <div class="row">
+                        <div class="colum-left">
+                            <small>Readable Only</small>
+                            <span class="input input--yoshiko">
+                                <input type="text" class="input__field input__field--yoshiko" required readonly onclick="choose_le_page();" placeholder="Cut: " disabled />
+                            </span>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+                    <div class="row">
+                        <div class="colum-left">
+                            <small>Readable Only</small>
+                            <span class="input input--yoshiko">
+                                <input type="text" class="input__field input__field--yoshiko" required readonly onclick="choose_le_page();" placeholder="Polish: @Model.Polish" disabled />
+                            </span>
+                        </div>
+
+                        <div class="cl"></div>
+                    </div>
+                    <div class="row">
+                        <div class="colum-left">
+                            <small>Readable Only</small>
+                            <span class="input input--yoshiko">
+                                <input type="text" class="input__field input__field--yoshiko" required readonly onclick="choose_le_page();" placeholder="Symmetry: @Model.Symmetry" disabled />
+                            </span>
+                        </div>
+
+                        <div class="cl"></div>
+                    </div>
+                    <div class="row">
+                        <div class="colum-left">
+                            <small>Readable Only</small>
+                            <span class="input input--yoshiko">
+                                <input type="text" class="input__field input__field--yoshiko" required readonly onclick="choose_le_page();" placeholder="Fluorescence: @Model.Flourescence" disabled />
+                            </span>
+                        </div>
+
+                        <div class="cl"></div>
+                    </div>
+                </div>
+                <div class="detail-section-right">
+                    <div class="row mob">
+                        <div class="colum-left">
+                            @{
+                        string eyeCleanChecked = "";
+                        if (Model.Type.ToLower() == "venus")
+                        {
+                            if (String.IsNullOrEmpty(Model.EyeClean) || Model.EyeClean.ToUpper() == "E0")
+                            {
+                                eyeCleanChecked = "checked=\"checked\"";
+                            }
+                        }
+
+                        else
+                        {
+                            if (Model.EyeClean.ToUpper() == "YES" || Model.EyeClean.ToUpper() == "E1")
+                            {
+                                eyeCleanChecked = "checked=\"checked\"";
+                            }
+
+                        }
+                            }
+                            <div class="eye-clean">
+                                <span>Eye Clean</span>
+                                <div class="checkbox-row request">
+                                    <input type="checkbox" name="checkbox1" id="eyeCleanRequestAvaliabilty" @eyeCleanChecked disabled="disabled" />
+                                    <label for="eyeCleanRequestAvaliabilty"><small>Yes</small></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cl"></div>
+                    </div>
+                    <div class="row">
+                        <div class="colum-left">
+                            <small>Readable Only</small>
+                            <span class="input input--yoshiko">
+                                <input type="text" class="input__field input__field--yoshiko" required readonly onclick="choose_le_page();" placeholder="Measurements: @Model.Measurements" disabled />
+                            </span>
+                        </div>
+                        <div class="cl"></div>
+                        </div>
+                    <div class="row">
+                        <div class="colum-left">
+                            <small>Readable Only</small>
+                            <span class="input input--yoshiko">
+                                <input type="text" class="input__field input__field--yoshiko" required readonly onclick="choose_le_page();" placeholder="LAB: @Model.Lab" disabled />
+                            </span>
+                        </div>
+                        <div class="cl"></div>
+                        </div>
+                    <div class="row">
+                        <div class="colum-left">
+                            <small>Readable Only</small>
+                            <span class="input input--yoshiko">
+                                <input type="text" class="input__field input__field--yoshiko" required readonly onclick="choose_le_page();" placeholder="Cert #: @Model.Cert" disabled />
+                            </span>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+                    <div class="row">
+                       <div class="colum-left">
+                            <small>Readable Only</small>
+                            <span class="input input--yoshiko">
+                                <input type="text" class="input__field input__field--yoshiko" required readonly onclick="choose_le_page();" placeholder="LOT: @Model.LotNumber" disabled />
+                            </span>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+                    <div class="row desk">
+                        <div class="colum-left">
+                        
+                        
+                            <div class="eye-clean">
+                                <span>Eye Clean</span>
+                                <div class="checkbox-row request">
+                                    <input type="checkbox" name="checkbox1" id="eyeCleanRequestAvaliabilty" @eyeCleanChecked disabled="disabled" />
+                                    <label for="eyeCleanRequestAvaliabilty"><small>Yes</small></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cl"></div>
+                    </div>
+                    <div class="row">
+                        <div class="colum-left padd" style="display:none;">
+                            <span class="input input--yoshiko">
+                                @Html.TextBoxFor(m => m.RequestAvailabilityDetails.DesignPrice, new { @class = "input__field input__field--yoshiko", @id = "design-price2" })
+                                @Html.ValidationMessageFor(x => x.RequestAvailabilityDetails.DesignPrice)
+                                <label class="input__label input__label--yoshiko" for="design-price2">
+                                    <span class="input__label-content input__label-content--yoshiko" data-content="Design Price $">
+                                        Design Price $
+                                    </span>
+                                </label>
+                            </span>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+                    </div>
+                <div class="cl"></div>
+                <h2>PRICE</h2>
+                <div class="row">
+                    <div class="colum-left">
+                        <small>Readable Only</small>
+                        <span class="input input--yoshiko">
+                            <input type="text" class="input__field input__field--yoshiko" required readonly onclick="choose_le_page();" placeholder="Diamond Price   :   @currancy @Model.TotalAmount" disabled />
+                        </span>
+                    </div>
+                    <div class="cl"></div>
+                </div>
+                <div class="row">
+                    <div class="colum-left" style="width:100%">
+                        <small>Maximum 8000 characters</small>
+                        <span class="input input--yoshiko">
+                            @Html.TextBoxFor(m => m.RequestAvailabilityDetails.Comment, new { @class = "input__field input__field--yoshiko", @id = "comment" })
+                            @Html.ValidationMessageFor(x => x.RequestAvailabilityDetails.Comment)
+                            <label class="input__label input__label--yoshiko" for="comment">
+                                <span class="input__label-content input__label-content--yoshiko star" data-content="Comments">
+                                    Comments
+                                </span>
+                            </label>
+                        </span>
+                    </div>
+
+                  
+                    
+                    <div class="cl"></div>
+                </div>
+
+
+
+
+
+                <div class="row">
+                    
+
+                    <div class="colum-left">
+                        <span class="input input--yoshiko">
+                            @Html.TextBoxFor(m => m.RequestAvailabilityDetails.ConsultantEmail, new { @class = "input__field input__field--yoshiko", @id = "ConsultantEmail" })
+                            @Html.ValidationMessageFor(x => x.RequestAvailabilityDetails.ConsultantEmail)
+                            <label class="input__label input__label--yoshiko" for="ConsultantEmail">
+                                <span class="input__label-content input__label-content--yoshiko star" data-content="Consultant Email">
+                                    Consultant Email
+                                </span>
+                            </label>
+                        </span>
+                    </div>
+
+                    <div class="cl"></div>
+                </div>
+
+
+
+
+
+
+
+               
+                
+                
+               
+                
+                
+                
+               
+                <div class="submit-btn"><input type="submit" value="EMAIL AVAILABILITY REQUEST" name="" id="btnRequestAvailability"></div>
+            </div>
+            <!-- result box end -->
+            <div class="cl"></div>
+        </div>
+        <div class="cl"></div>
+    </div>
+}
+
+<script type="text/javascript">
+
+    function FnRequestAvailabilityOnBegin() {
+        //$("#submit-btn")
+        $("#btnRequestAvailability").attr("disabled", "disabled");
+        $("#btnRequestAvailability").addClass("btn-loader");
+    }
+
+
+    function FnRequestAvailabilitySubmitted(data) {
+        if (data.msg == 'ok') {
+            $('[name="RequestAvailabilityDetails.CustomerName"]').val('');
+            $('[name="RequestAvailabilityDetails.JcsCustomerNumber"]').val('');
+            $('[name="RequestAvailabilityDetails.OrderNumber"]').val('');
+            $('[name="RequestAvailabilityDetails.DueDate"]').val('');
+            $('[name="RequestAvailabilityDetails.DesignPrice"]').val('');
+            $('[name="RequestAvailabilityDetails.Comment"]').val('');
+            $("#btnRequestAvailability").removeAttr("disabled", "disabled");
+            $("#btnRequestAvailability").removeClass("btn-loader");
+            sweetAlert("", "Diamond availability request has been submitted.", "success");
+        }
+        else {
+            $("#btnOrderRequest").removeAttr("disabled");
+            $("#btnOrderRequest").removeClass("btn-loader");
+            sweetAlert("", "" + data.data + "", "error");
+        }
+    }
+</script>

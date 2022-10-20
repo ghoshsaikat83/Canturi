@@ -1,0 +1,17 @@
+﻿WebClient start
+WebClient end
+WebClient start
+WebClient end
+WebClient start
+WebClient end
+Successfully Inserting Diamond Procedure - 18-11-2020 05:04:33 PM
+WebClient start
+WebClient end
+Successfully Inserting Diamond Procedure - 18-11-2020 05:24:42 PM
+Error Timer Handler - 19-11-2020 12:20:30 PM - Service start
+WebClient start
+WebClient end
+Successfully Inserting Diamond Procedure - 19-11-2020 05:05:02 PM
+WebClient start
+WebClient end
+Successfully Inserting Diamond Procedure - 19-11-2020 05:52:47 PM

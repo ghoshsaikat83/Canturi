@@ -1,0 +1,52 @@
+﻿@model Canturi.Models.BusinessEntity.FrontEnd.LogOnModels
+@{    
+    Layout = "";
+
+    
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CANTURI</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link href="@Url.Content("~/favicon.ico")" rel="shortcut icon" type="image/x-icon" />
+
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/FrontEnd/css/style.css")" />
+    <!--[if IE]><script src="@Url.Content("~/Content/FrontEnd/js/html5.js")"></script><![endif]-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+</head>
+<body>
+    <!-- login container -->
+    <div class="login-container">
+        <img src="@Url.Content("~/Content/FrontEnd/images/login-logo.png")" />
+        <div class="login-box">
+            <h3>Login</h3>
+            <div class="login-contbox">
+                @using (Html.BeginForm())
+                {
+                    <div class="MsgRed1" style="color: Red">
+                        @Model.Message
+                    </div>
+                    <p>
+                        @Html.TextBoxFor(m => m.UserName, new { @placeholder = "Username" })
+                        @Html.ValidationMessageFor(m => m.UserName)
+                    </p>
+                    <p>
+                        @Html.PasswordFor(m => m.Password, new { @placeholder = "Password" })
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </p>
+                    <p class="npb"><input type="submit" name="" value="sign in" /></p>
+                    <div class="cl"></div>
+                }
+            </div>
+            <div class="cl"></div>
+        </div>
+        <div class="cl"></div>
+    </div>
+    <!-- login container end -->
+</body>
+</html>
+

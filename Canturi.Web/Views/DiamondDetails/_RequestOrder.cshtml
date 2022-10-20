@@ -1,0 +1,680 @@
+﻿@model Canturi.Models.BusinessEntity.FrontEnd.DiamondDetailModels
+@using Canturi.Models.BusinessEntity.FrontEnd;
+@using Canturi.Models.BusinessHelper.CommonHelper;
+@*@using (Html.BeginForm("_RequestOrder", "DiamondDetails"))*@
+<style type="text/css">
+    .balance-due-via .field-validation-error {
+        position: relative !important;
+        bottom: 0;
+        width: 100%;
+    }
+</style>
+<div id="result" style="display:none;"></div>
+
+
+@using (Ajax.BeginForm("_RequestOrder", "DiamondDetails", new AjaxOptions
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.InsertBefore,
+        UpdateTargetId = "result",
+        OnSuccess = "FnRequestOrderSubmitted(data)",
+        OnBegin = "FnRequestOrderOnBegin()"
+
+    }))
+   {
+
+
+    @Html.HiddenFor(m => m.DiamondId)
+    @Html.HiddenFor(m => m.Type)
+    <!-- result section -->
+    <div class="order-form-section">
+
+
+      @{
+
+        string currancy = "";
+        if (UserSessionData.Currency.ToLower() == "aud")
+        {
+            currancy = "AUD $";
+        }
+        else if (UserSessionData.Currency.ToLower() == "euro")
+        {
+            currancy = "€";
+        }
+        else if (UserSessionData.Currency.ToLower() == "usd")
+        {
+            currancy = "$";
+        }
+        else
+        {
+            currancy = "$";
+        }
+
+      }
+        <div class="order-detail content" @Html.Raw((Model.IsRequestOrder == true ? "style=\"display:block;\"" : ""))>
+            <!-- result box -->
+            <div class="form-box">
+                <h2>Customer Details</h2>
+                <div class="row">
+                    <div class="colum-left">
+                        <span class="input input--yoshiko">
+                            @Html.TextBoxFor(m => m.RequestOrderDetails.CustomerName, new { @class = "input__field input__field--yoshiko", @id = "customer-name" })
+                            @Html.ValidationMessageFor(x => x.RequestOrderDetails.CustomerName)
+                            <label class="input__label input__label--yoshiko" for="customer-name">
+                                <span class="input__label-content input__label-content--yoshiko  star" data-content="Customer Name">Customer Name</span>
+                            </label>
+                        </span>
+                    </div>
+                    <div class="colum-left right">
+                        <span class="input input--yoshiko" id="spndue-date">
+                            @Html.TextBoxFor(m => m.RequestOrderDetails.DueDate, new { @class = "input__field input__field--yoshiko", @id = "due-date" })
+                            @Html.ValidationMessageFor(x => x.RequestOrderDetails.DueDate)
+                            <label class="input__label input__label--yoshiko" for="due-date">
+                                <span class="input__label-content input__label-content--yoshiko star" data-content="Order Due Date">Order Due Date </span>
+                            </label>
+                        </span>
+                    </div>
+                    @*<div class="colum-left right">
+                            <span class="input input--yoshiko">
+                                @Html.TextBoxFor(m => m.RequestOrderDetails.JcsCustomerNumber, new { @class = "input__field input__field--yoshiko", @id = "jcs-customer" })
+                                @Html.ValidationMessageFor(x => x.RequestOrderDetails.JcsCustomerNumber)
+                                <label class="input__label input__label--yoshiko" for="jcs-customer">
+                                    <span class="input__label-content input__label-content--yoshiko star" data-content="JCS Customer #">JCS Customer #</span>
+                                </label>
+                            </span>
+                        </div>*@
+                    <div class="cl"></div>
+                </div>
+                @*<div class="row">
+                        <div class="colum-left">
+                            <span class="input input--yoshiko">
+                                @Html.TextBoxFor(m => m.RequestOrderDetails.OrderNumber, new { @class = "input__field input__field--yoshiko", @id = "order" })
+                                @Html.ValidationMessageFor(x => x.RequestOrderDetails.OrderNumber)
+                                <label class="input__label input__label--yoshiko" for="order">
+                                    <span class="input__label-content input__label-content--yoshiko  star" data-content="Order #">Order # </span>
+                                </label>
+                            </span>
+                        </div>
+                        <div class="colum-left right">
+                            <span class="input input--yoshiko" id="spndue-date">
+                                @Html.TextBoxFor(m => m.RequestOrderDetails.DueDate, new { @class = "input__field input__field--yoshiko", @id = "due-date" })
+                                @Html.ValidationMessageFor(x => x.RequestOrderDetails.DueDate)
+                                <label class="input__label input__label--yoshiko" for="due-date">
+                                    <span class="input__label-content input__label-content--yoshiko star" data-content="Order Due Date">Order Due Date </span>
+                                </label>
+                            </span>
+                        </div>
+                        <div class="cl"></div>
+                    </div>*@
+                <div class="row" style="padding:0px;"><h2>Diamond Details</h2></div>
+                <div class="detail-section-left">
+                    <div class="row">
+                        <div class="colum-left">
+                            <small>Readable Only</small>
+                            <span class="input input--yoshiko">
+                                <input type="text" class="input__field input__field--yoshiko" required readonly onclick="choose_le_page();" placeholder="Shape: @Model.Shape" disabled />
+                            </span>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+                    <div class="row">
+                        <div class="colum-left">
+                            <small>Readable Only</small>
+                            <span class="input input--yoshiko">
+                                @{
+
+                                    decimal tmpCarat = 0;
+                                    try
+                                    {
+
+                                        tmpCarat = Convert.ToDecimal(Model.Carat);
+
+                                    }
+                                    catch { }
+
+                                }
+                                <input type="text" class="input__field input__field--yoshiko" required readonly onclick="choose_le_page();" placeholder="Carat: @CommonData.FormatDecimal(tmpCarat)" disabled />
+                            </span>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+                    <div class="row">
+                        <div class="colum-left">
+                            <small>Readable Only</small>
+                            <span class="input input--yoshiko">
+                                <input type="text" class="input__field input__field--yoshiko" required readonly onclick="choose_le_page();" placeholder="Colour: @Model.Colour" disabled />
+                            </span>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+                    <div class="row">
+                        <div class="colum-left">
+                            <small>Readable Only</small>
+                            <span class="input input--yoshiko">
+                                <input type="text" class="input__field input__field--yoshiko" required readonly onclick="choose_le_page();" placeholder="Clarity: @Model.Clarity" disabled />
+                            </span>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+                    <div class="row">
+                        <div class="colum-left">
+                            <small>Readable Only</small>
+                            <span class="input input--yoshiko">
+                                <input type="text" class="input__field input__field--yoshiko" required readonly onclick="choose_le_page();" placeholder="Cut: " disabled />
+                            </span>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+                    <div class="row">
+                        <div class="colum-left">
+                            <small>Readable Only</small>
+                            <span class="input input--yoshiko">
+                                <input type="text" class="input__field input__field--yoshiko" required readonly onclick="choose_le_page();" placeholder="Polish: @Model.Polish" disabled />
+                            </span>
+                        </div>
+
+                        <div class="cl"></div>
+                    </div>
+                    <div class="row">
+                        <div class="colum-left">
+                            <small>Readable Only</small>
+                            <span class="input input--yoshiko">
+                                <input type="text" class="input__field input__field--yoshiko" required readonly onclick="choose_le_page();" placeholder="Symmetry: @Model.Symmetry" disabled />
+                            </span>
+                        </div>
+
+                        <div class="cl"></div>
+                    </div>
+                    <div class="row">
+                        <div class="colum-left">
+                            <small>Readable Only</small>
+                            <span class="input input--yoshiko">
+                                <input type="text" class="input__field input__field--yoshiko" required readonly onclick="choose_le_page();" placeholder="Fluorescence: @Model.Flourescence" disabled />
+                            </span>
+                        </div>
+
+                        <div class="cl"></div>
+                    </div>
+
+                </div>
+                <div class="detail-section-right">
+                    <div class="row mob">
+                        <div class="colum-left">
+                            @{
+    string eyeCleanChecked = "";
+    if (Model.Type.ToLower() == "venus")
+    {
+        if (String.IsNullOrEmpty(Model.EyeClean) || Model.EyeClean.ToUpper() == "E0")
+        {
+            eyeCleanChecked = "checked=\"checked\"";
+        }
+    }
+
+    else
+    {
+        if (Model.EyeClean.ToUpper() == "YES" || Model.EyeClean.ToUpper() == "E1")
+        {
+            eyeCleanChecked = "checked=\"checked\"";
+        }
+
+    }
+                            }
+                            <div class="eye-clean">
+                                <span>Eye Clean</span>
+                                <div class="checkbox-row request">
+                                    <input type="checkbox" name="checkbox1" id="eyeCleanRequestOrder" @eyeCleanChecked disabled="disabled" />
+                                    <label for="eyeCleanRequestOrder"><small>Yes</small></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+                    <div class="row">
+                        <div class="colum-left">
+                            <small>Readable Only</small>
+                            <span class="input input--yoshiko">
+                                <input type="text" class="input__field input__field--yoshiko" required readonly onclick="choose_le_page();" placeholder="Measurements: @Model.Measurements" disabled />
+                            </span>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+                    <div class="row">
+                        <div class="colum-left">
+                            <small>Readable Only</small>
+                            <span class="input input--yoshiko">
+                                <input type="text" class="input__field input__field--yoshiko" required readonly onclick="choose_le_page();" placeholder="LAB: @Model.Lab" disabled />
+                            </span>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+                    <div class="row">
+                        <div class="colum-left">
+                            <small>Readable Only</small>
+                            <span class="input input--yoshiko">
+                                <input type="text" class="input__field input__field--yoshiko" required readonly onclick="choose_le_page();" placeholder="Cert #: @Model.Cert" disabled />
+                            </span>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+                    <div class="row">
+                        <div class="colum-left">
+                            <small>Readable Only</small>
+                            <span class="input input--yoshiko">
+                                <input type="text" class="input__field input__field--yoshiko" required readonly onclick="choose_le_page();" placeholder="LOT: @Model.LotNumber" disabled />
+                            </span>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+                    <div class="row desk">
+                        <div class="colum-left right">
+                            <div class="eye-clean">
+                                <span>Eye Clean</span>
+                                <div class="checkbox-row request">
+                                    <input type="checkbox" name="checkbox1" id="eyeCleanRequestOrder" @eyeCleanChecked disabled="disabled" />
+                                    <label for="eyeCleanRequestOrder"><small>Yes</small></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+
+                </div>
+                <div class="cl"></div>
+                <h2>PRICE</h2>
+                <div class="row">
+                    <div class="colum-left">
+                        <small>Readable Only</small>
+                        <span class="input input--yoshiko">
+                            @Html.HiddenFor(m => m.TotalAmount)
+                            <input type="text" class="input__field input__field--yoshiko" required readonly onclick="choose_le_page();" placeholder="Diamond Price   :    @currancy @Model.TotalAmount" disabled />
+                        </span>
+                    </div>
+                    <div class="colum-left right padd" style="display:none;">
+                        <span class="input input--yoshiko">
+                            @Html.TextBoxFor(m => m.RequestOrderDetails.DesignPrice, new { @class = "input__field input__field--yoshiko", @id = "design-price2" })
+                            @Html.ValidationMessageFor(x => x.RequestOrderDetails.DesignPrice)
+                            <label class="input__label input__label--yoshiko" for="design-price2">
+                                <span class="input__label-content input__label-content--yoshiko" data-content="Design Price $">
+                                    Design Price $
+                                </span>
+                            </label>
+                        </span>
+                    </div>
+                    <div class="cl"></div>
+                </div>
+                <div id="divPayment">
+                    <div class="row">
+                        <div class="colum-left">
+                            <div class="radio-box">
+                                @Html.HiddenFor(m => m.RequestOrderDetails.IsFullPayment)
+                                <label>
+                                    @*IsFullPayment*@
+                                    <input type="radio" name="IsFullPayment" value="false" id="rbtnIsFullPaymentNo" onclick="FnIsFullPayment('rbtnIsFullPaymentNo')" />
+                                    <span>deposit only to confirm availability</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="colum-left right">
+                            <div class="radio-box rb-rgt">
+                                <label><input type="radio" name="IsFullPayment" value="true" class="IsFullPayment" id="rbtnIsFullPaymentYes" onclick="FnIsFullPayment('rbtnIsFullPaymentYes')"><span>FULL PAYMENT</span></label>
+                            </div>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+                </div>
+                <div class="cl"></div>
+             
+
+                <div id="divDepositConfirmAvailabilty" style="display:none;">
+                    <div class="row">
+                        <div class="colum-left">
+                            <span class="input input--yoshiko">
+                                @Html.TextBoxFor(m => m.RequestOrderDetails.AvailabilityDepositToken, new { @class = "input__field input__field--yoshiko", @id = "deposit", @onblur = "FnBalanceDue()" })
+                                @Html.ValidationMessageFor(x => x.RequestOrderDetails.AvailabilityDepositToken)
+                                <label class="input__label input__label--yoshiko" for="deposit">
+                                    <span class="input__label-content input__label-content--yoshiko star" data-content="Availability Deposit Taken $">
+                                        Availability Deposit Taken $
+                                    </span>
+                                </label>
+                            </span>
+                        </div>
+                        <div class="colum-left right">
+                            <span class="input input--yoshiko" id="spndate-paid">
+                                @Html.TextBoxFor(m => m.RequestOrderDetails.DatePaid, new { @class = "input__field input__field--yoshiko", @id = "date-paid" })
+                                @Html.ValidationMessageFor(x => x.RequestOrderDetails.DatePaid)
+                                <label class="input__label input__label--yoshiko" for="date-paid">
+                                    <span class="input__label-content input__label-content--yoshiko star" data-content="Date Paid">
+                                        Date Paid
+                                    </span>
+                                </label>
+                            </span>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+                    <div class="row">
+                        <div class="colum-left">
+                            <span class="input input--yoshiko" id="spnBalanceDue">
+                                @Html.TextBoxFor(m => m.RequestOrderDetails.BalanceDue, new { @class = "input__field input__field--yoshiko", @id = "balance-due" })
+                                @Html.ValidationMessageFor(x => x.RequestOrderDetails.BalanceDue)
+                                <label class="input__label input__label--yoshiko" for="balance-due">
+                                    <span class="input__label-content input__label-content--yoshiko star" data-content="Balance Due $">
+                                        Balance Due $
+                                    </span>
+                                </label>
+                            </span>
+                        </div>
+                        <div class="colum-left right" style="display:none;">
+                            <span class="input input--yoshiko" id="spndate-be-paid">
+                                @Html.TextBoxFor(m => m.RequestOrderDetails.DateToBePaid, new { @class = "input__field input__field--yoshiko", @id = "date-be-paid" })
+                                @Html.ValidationMessageFor(x => x.RequestOrderDetails.DateToBePaid)
+                                <label class="input__label input__label--yoshiko" for="date-be-paid">
+                                    <span class="input__label-content input__label-content--yoshiko star" data-content="Date to be Paid">
+                                        Date to be Paid
+                                    </span>
+                                </label>
+                            </span>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+
+                </div>
+                <h4 style="display:none;">OR</h4>
+
+                <div id="divFullPayment" style="display:none;">
+                    <div class="row">
+                        <div class="colum-left">
+                            <span class="input input--yoshiko" id="spndate-paid-full">
+                                @Html.TextBoxFor(m => m.RequestOrderDetails.DateDiamondPaidInFull, new { @class = "input__field input__field--yoshiko", @id = "date-paid-full" })
+                                @Html.ValidationMessageFor(x => x.RequestOrderDetails.DateDiamondPaidInFull)
+                                <label class="input__label input__label--yoshiko" for="date-paid-full">
+                                    <span class="input__label-content input__label-content--yoshiko star" data-content="Date Diamond Paid in Full">
+                                        Date Diamond Paid in Full
+                                    </span>
+                                </label>
+                            </span>
+                        </div>
+                        <div class="colum-left right">
+                            <span class="input input--yoshiko">
+                                @Html.TextBoxFor(m => m.RequestOrderDetails.FullAmount, new { @class = "input__field input__field--yoshiko", @id = "amount" })
+                                @Html.ValidationMessageFor(x => x.RequestOrderDetails.FullAmount)
+                                <label class="input__label input__label--yoshiko" for="amount">
+                                    <span class="input__label-content input__label-content--yoshiko star" data-content="Amount $">
+                                        Amount $
+                                    </span>
+                                </label>
+                            </span>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+                    <div class="row" style="display:none;">
+                        <div class="colum-left padd">
+                            <span class="input input--yoshiko" id="spndate-order-full">
+                                @Html.TextBoxFor(m => m.RequestOrderDetails.DateOrderPaidInFull, new { @class = "input__field input__field--yoshiko", @id = "date-order-full" })
+                                @Html.ValidationMessageFor(x => x.RequestOrderDetails.DateOrderPaidInFull)
+                                <label class="input__label input__label--yoshiko" for="date-order-full">
+                                    <span class="input__label-content input__label-content--yoshiko star" data-content="Date Order Paid in Full">
+                                        Date Order Paid in Full
+                                    </span>
+                                </label>
+                            </span>
+                        </div>
+
+                        <div class="cl"></div>
+                    </div>
+                </div>
+                <div id="divFullPaymentVia" style="display:none;">
+                    <div class="payment-row">
+                        <small id="spnFullPaymentText">Full Payment paid via</small>
+                        <div class="che-box">
+                            <div style="height:0; width:0; overflow:hidden;">@Html.TextBoxFor(m => m.RequestOrderDetails.PaymentBalanceDueVia)</div>
+
+                            @Html.HiddenFor(m => m.RequestOrderDetails.IsBankTransfer)
+                            <input type="checkbox" id="c1" name="cc" onclick="FnBalanceDueVia('c1')" />
+                            <label for="c1"><span></span></label>
+                            <span>Bank Transfer</span>
+                        </div>
+                        <div class="che-box">
+                            @Html.HiddenFor(m => m.RequestOrderDetails.IsCreditCard)
+                            <input type="checkbox" id="c2" name="cc" onclick="FnBalanceDueVia('c2')" />
+                            <label for="c2"><span></span></label>
+                            <span>Credit Card</span>
+                        </div>
+                        <div class="che-box">
+                            @Html.HiddenFor(m => m.RequestOrderDetails.IsCash)
+                            <input type="checkbox" id="c3" name="cc" onclick="FnBalanceDueVia('c3')" />
+                            <label for="c3"><span></span></label>
+                            <span>Cash</span>
+                        </div>
+                        <div class="che-box">
+                            @Html.HiddenFor(m => m.RequestOrderDetails.IsOther)
+                            <input type="checkbox" id="c4" name="cc" onclick="FnBalanceDueVia('c4')" />
+                            <label for="c4"><span></span></label>
+                            <span>Other</span>
+                        </div>
+
+                        <div class="cl"></div>
+
+                    </div>
+                    <span class="balance-due-via">@Html.ValidationMessageFor(x => x.RequestOrderDetails.PaymentBalanceDueVia)</span>
+
+                    <p id="pFullPayment">(Full Payment of diamond to be received by next working day to secure diamond)</p>
+                </div>
+            
+                <h2 style="padding-top:15px;">CLIENT VIEWING</h2>
+                <div class="radio-section">
+                    <div class="radio-box">
+                        <div style="height:0; width:0; overflow:hidden;">@Html.TextBoxFor(m => m.RequestOrderDetails.IsClientViewing)</div>
+
+                        <label><input type="radio" name="IsClientViewing" value="false" id="rbtnIsClientViewingYes" onclick="FnIsClientViewing($(this))" /><span>Yes</span></label>
+                    </div>
+                    <div class="radio-box">
+                        <label><input type="radio" name="IsClientViewing" value="false" id="rbtnIsClientViewingNo" onclick="FnIsClientViewing($(this))"><span>No</span></label>
+                    </div>
+                </div>
+
+
+                <div class="cl"></div>
+                <span class="balance-due-via">@Html.ValidationMessageFor(x => x.RequestOrderDetails.IsClientViewing)</span>
+                <div class="cl"></div>
+                <h2 style="padding-top:15px;">CERTIFICATE VIEWED BY CLIENT</h2>
+                <div class="radio-section">
+                    <div class="radio-box">
+                        <div style="height:0; width:0; overflow:hidden;">@Html.TextBoxFor(m => m.RequestOrderDetails.IsCertificateViewdByClient)</div>
+
+                        <label>
+                            <input type="radio" name="yes" value="Yes" onclick="FnCertificateViewd('rbtnCertificateViewYes')" id="rbtnCertificateViewYes" />
+                            <span>Yes</span>
+                        </label>
+                    </div>
+                    <div class="radio-box">
+                        <label><input type="radio" name="yes" value="Not Importan" onclick="FnCertificateViewd('rbtnCertificateViewNo')" id="rbtnCertificateViewNo" /><span>Not Important</span></label>
+                    </div>
+                </div>
+                <div class="cl"></div>
+                <span class="balance-due-via">@Html.ValidationMessageFor(x => x.RequestOrderDetails.IsCertificateViewdByClient)</span>
+                <div class="cl"></div>
+                <div class="row">
+                    <div class="colum-left">
+                        <small>Maximum 8000 characters</small>
+                        <span class="input input--yoshiko input-comments">
+                            @Html.TextBoxFor(m => m.RequestOrderDetails.Comment, new { @class = "input__field input__field--yoshiko", @id = "comment", @style = "padding:0.8em" })
+                            @Html.ValidationMessageFor(x => x.RequestOrderDetails.Comment)
+                            <label class="input__label input__label--yoshiko" for="comment">
+                                <span class="input__label-content input__label-content--yoshiko" data-content="Comments">
+                                    Comments
+                                </span>
+                            </label>
+                        </span>
+                    </div>
+                    <div class="colum-left right">
+                        <small>&nbsp;</small>
+                        <span class="input input--yoshiko">
+                            @Html.TextBoxFor(m => m.RequestOrderDetails.ConsultantEmail, new { @class = "input__field input__field--yoshiko", @id = "ConsultantEmail" })
+                            @Html.ValidationMessageFor(x => x.RequestOrderDetails.ConsultantEmail)
+                            <label class="input__label input__label--yoshiko" for="ConsultantEmail">
+                                <span class="input__label-content input__label-content--yoshiko star" data-content="Consultant Email">
+                                    Consultant Email
+                                </span>
+                            </label>
+                        </span>
+                    </div>
+
+
+                    <div class="cl"></div>
+                </div>
+                <div class="cl"></div>
+
+
+                <div class="cl"></div>
+                <div class="submit-btn"><input type="submit" value="Email Order Request" name="" id="btnOrderRequest"></div>
+            </div>
+            <!-- result box end -->
+            <div class="cl"></div>
+        </div>
+        <div class="cl"></div>
+    </div>
+    <!-- order-form-section end -->
+}
+<script type="text/javascript">
+    function FnIsFullPayment(id) {
+        $("#divFullPaymentVia").show();
+        $("#pFullPayment").hide();
+        if (id == "rbtnIsFullPaymentNo") {
+            $("#pFullPayment").show();
+            $("#spnFullPaymentText").text("Payment of balance due via");
+            $("#divDepositConfirmAvailabilty").show();
+            $("#divFullPayment").hide();
+            $("#RequestOrderDetails_IsFullPayment").val('false');
+        }
+        else {
+            $("#spnFullPaymentText").text("Full payment paid via");
+            $("#divDepositConfirmAvailabilty").hide();
+            $("#divFullPayment").show();
+            $("#RequestOrderDetails_IsFullPayment").val('true');
+        }
+        //alert(id);
+        //alert($("#" + id).val());
+        //alert($("#" + id).attr('checked'));
+    }
+
+    function FnIsClientViewing(elem) {                
+        //$("#RequestOrderDetails_IsClientViewing").val(elem.val());
+        var viewingId = elem[0].id;
+        //alert(viewingId);
+        if (viewingId == "rbtnIsClientViewingYes") {
+            $("#RequestOrderDetails_IsClientViewing").val('true');
+        }
+        else {
+            $("#RequestOrderDetails_IsClientViewing").val('false');
+        }
+    }
+
+    function FnCertificateViewd(id) {
+        if (id == "rbtnCertificateViewYes") {
+            $("#RequestOrderDetails_IsCertificateViewdByClient").val('true');
+        }
+        else {
+            $("#RequestOrderDetails_IsCertificateViewdByClient").val('false');
+        }
+    }
+
+
+    function FnRequestOrderOnBegin() {
+        $("#btnOrderRequest").attr("disabled", "disabled");
+        $("#btnOrderRequest").addClass("btn-loader");
+    }
+
+
+    function FnRequestOrderSubmitted(data) {
+        if (data.msg == 'ok') {
+            $('[name="RequestOrderDetails.CustomerName"]').val('');
+            $('[name="RequestOrderDetails.JcsCustomerNumber"]').val('');
+            $('[name="RequestOrderDetails.OrderNumber"]').val('');
+            $('[name="RequestOrderDetails.DueDate"]').val('');
+            $('[name="RequestOrderDetails.DesignPrice"]').val('');
+            $('[name="RequestOrderDetails.AvailabilityDepositToken"]').val('');
+            $('[name="RequestOrderDetails.BalanceDue"]').val('');
+            $('[name="RequestOrderDetails.DatePaid"]').val('');
+            $('[name="RequestOrderDetails.DateToBePaid"]').val('');
+            $('[name="RequestOrderDetails.DateDiamondPaidInFull"]').val('');
+            $('[name="RequestOrderDetails.DateOrderPaidInFull"]').val('');
+            $('[name="RequestOrderDetails.FullAmount"]').val('');
+            $('[name="RequestOrderDetails.Comment"]').val('');
+            $("#btnOrderRequest").removeAttr("disabled", "disabled");
+            $("#btnOrderRequest").removeClass("btn-loader");
+            $(".order-link").remove();
+            $(".request-link").remove();
+            $(".order-detail").remove();
+            $("#trLotNumber").remove();
+            $(".request-detail").remove();
+            sweetAlert("", "Diamond order request has been submitted", "success");
+        }
+        else {
+            $("#btnOrderRequest").removeAttr("disabled");
+            $("#btnOrderRequest").removeClass("btn-loader");
+            sweetAlert("", "" + data.data + "", "error");
+        }
+
+    }
+    function FnBalanceDueVia(id) {
+        //alert($("#" + id).attr('checked'));
+        $("#RequestOrderDetails_PaymentBalanceDueVia").val(id);
+        if (id == 'c1') {
+            if ($("#" + id).attr('checked')) {
+                $("#RequestOrderDetails_IsBankTransfer").val('true');
+            }
+            else {
+                $("#RequestOrderDetails_IsBankTransfer").val('false');
+            }
+        }
+        if (id == 'c2') {
+            if ($("#" + id).attr('checked')) {
+                $("#RequestOrderDetails_IsCreditCard").val('true');
+            }
+            else {
+                $("#RequestOrderDetails_IsCreditCard").val('false');
+            }
+        }
+        if (id == 'c3') {
+            if ($("#" + id).attr('checked')) {
+                $("#RequestOrderDetails_IsCash").val('true');
+            }
+            else {
+                $("#RequestOrderDetails_IsCash").val('false');
+            }
+        }
+        if (id == 'c4') {
+            if ($("#" + id).attr('checked')) {
+                $("#RequestOrderDetails_IsOther").val('true');
+            }
+            else {
+                $("#RequestOrderDetails_IsOther").val('false');
+            }
+        }
+    }
+
+    function FnBalanceDue() {
+        try {
+            var totalAmount = parseFloat($("#TotalAmount").val());
+            var depositAmount = parseFloat($("#deposit").val());
+            var balanceDue = totalAmount - depositAmount;
+            if (balanceDue.toString() != "NaN") {
+                if (balanceDue > 0) {
+                    $("#balance-due").val(totalAmount - depositAmount);
+                    $("#spnBalanceDue").addClass("input--filled");
+                }
+                else {
+                    $("#balance-due").val("");
+                    $("#deposit").val("");
+                    $("#spnBalanceDue").removeClass("input--filled");
+                    sweetAlert("", "Availability deposit taken amount should be less than or equal to diamond amount!", "error");
+                }
+
+
+            }
+        } catch (e) {
+            $("#balance-due").val("");
+        }
+
+    }
+</script>

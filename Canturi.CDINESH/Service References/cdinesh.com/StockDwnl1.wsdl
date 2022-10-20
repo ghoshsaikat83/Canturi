@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:import />
+      <s:import schemaLocation="http://service.cdinesh.com/StockDwnl.asmx?schema=DataSet1" />
+      <s:element name="GetFullStockXML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Uid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFullStockXMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFullStockXMLResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFullStock">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Uid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFullStockResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFullStockResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFullStock1">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Uid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFullStock1Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFullStock1Result">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFullStockJSON">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Uid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFullStockJSONResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFullStockJSONResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="cdapi">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Uid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="cdapiResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cdapiResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="B2CService">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Uid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="B2CServiceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="B2CServiceResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any namespace="" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetFullStockXMLSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFullStockXML" />
+  </wsdl:message>
+  <wsdl:message name="GetFullStockXMLSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFullStockXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFullStockSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFullStock" />
+  </wsdl:message>
+  <wsdl:message name="GetFullStockSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFullStockResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFullStock1SoapIn">
+    <wsdl:part name="parameters" element="tns:GetFullStock1" />
+  </wsdl:message>
+  <wsdl:message name="GetFullStock1SoapOut">
+    <wsdl:part name="parameters" element="tns:GetFullStock1Response" />
+  </wsdl:message>
+  <wsdl:message name="GetFullStockJSONSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFullStockJSON" />
+  </wsdl:message>
+  <wsdl:message name="GetFullStockJSONSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFullStockJSONResponse" />
+  </wsdl:message>
+  <wsdl:message name="cdapiSoapIn">
+    <wsdl:part name="parameters" element="tns:cdapi" />
+  </wsdl:message>
+  <wsdl:message name="cdapiSoapOut">
+    <wsdl:part name="parameters" element="tns:cdapiResponse" />
+  </wsdl:message>
+  <wsdl:message name="B2CServiceSoapIn">
+    <wsdl:part name="parameters" element="tns:B2CService" />
+  </wsdl:message>
+  <wsdl:message name="B2CServiceSoapOut">
+    <wsdl:part name="parameters" element="tns:B2CServiceResponse" />
+  </wsdl:message>
+  <wsdl:portType name="StockDwnlSoap">
+    <wsdl:operation name="GetFullStockXML">
+      <wsdl:input message="tns:GetFullStockXMLSoapIn" />
+      <wsdl:output message="tns:GetFullStockXMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFullStock">
+      <wsdl:input message="tns:GetFullStockSoapIn" />
+      <wsdl:output message="tns:GetFullStockSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFullStock1">
+      <wsdl:input message="tns:GetFullStock1SoapIn" />
+      <wsdl:output message="tns:GetFullStock1SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFullStockJSON">
+      <wsdl:input message="tns:GetFullStockJSONSoapIn" />
+      <wsdl:output message="tns:GetFullStockJSONSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="cdapi">
+      <wsdl:input message="tns:cdapiSoapIn" />
+      <wsdl:output message="tns:cdapiSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="B2CService">
+      <wsdl:input message="tns:B2CServiceSoapIn" />
+      <wsdl:output message="tns:B2CServiceSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="StockDwnlSoap" type="tns:StockDwnlSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetFullStockXML">
+      <soap:operation soapAction="http://tempuri.org/GetFullStockXML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFullStock">
+      <soap:operation soapAction="http://tempuri.org/GetFullStock" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFullStock1">
+      <soap:operation soapAction="http://tempuri.org/GetFullStock1" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFullStockJSON">
+      <soap:operation soapAction="http://tempuri.org/GetFullStockJSON" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cdapi">
+      <soap:operation soapAction="http://tempuri.org/cdapi" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="B2CService">
+      <soap:operation soapAction="http://tempuri.org/B2CService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="StockDwnlSoap12" type="tns:StockDwnlSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetFullStockXML">
+      <soap12:operation soapAction="http://tempuri.org/GetFullStockXML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFullStock">
+      <soap12:operation soapAction="http://tempuri.org/GetFullStock" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFullStock1">
+      <soap12:operation soapAction="http://tempuri.org/GetFullStock1" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFullStockJSON">
+      <soap12:operation soapAction="http://tempuri.org/GetFullStockJSON" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cdapi">
+      <soap12:operation soapAction="http://tempuri.org/cdapi" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="B2CService">
+      <soap12:operation soapAction="http://tempuri.org/B2CService" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="StockDwnl">
+    <wsdl:port name="StockDwnlSoap" binding="tns:StockDwnlSoap">
+      <soap:address location="http://service.cdinesh.com/StockDwnl.asmx" />
+    </wsdl:port>
+    <wsdl:port name="StockDwnlSoap12" binding="tns:StockDwnlSoap12">
+      <soap12:address location="http://service.cdinesh.com/StockDwnl.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

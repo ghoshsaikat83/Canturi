@@ -1,0 +1,153 @@
+﻿@model Canturi.Models.BusinessEntity.Admin.DiamondModels
+@using Canturi.Models.BusinessHelper.CommonHelper
+@{
+    ViewBag.Title = "Diamond Csv Upload";
+    Layout = "~/Areas/SecureAdmin/Views/Shared/_Layout.cshtml";
+}
+
+
+<style type="text/css">
+    .style1 {
+        height: 30px;
+    }
+
+    .style2 {
+        height: 39px;
+    }
+
+    .style3 {
+        height: 127px;
+    }
+
+    .csv-upload label {
+        padding-right: 15px;
+        vertical-align: bottom;
+    }
+
+    .csv-upload .csv-block {
+        display: inline-block;
+    }
+
+    .csv-upload td {
+        padding-bottom: 5px;
+    }
+
+    .csv-upload input[type=radio] {
+        height: 20px;
+        width: 20px;
+    }
+</style>
+<section class="content-header">
+    <h1>
+        Manage Diamond
+        <small>Control panel</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Content("~/SecureAdmin/DashBoard")"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Manage Diamond</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="box box-primary">
+            <div class="box-header">
+                <h3 class="box-title">
+                    Csv Upload
+                </h3>
+            </div>
+            @using (Html.BeginForm("CsvUpload", "Diamond", FormMethod.Post, new { enctype = "multipart/form-data", @id = "frmCsvUpload" }))
+            {
+                <div class="box-body csv-upload">
+                    <table>
+                        <tr>
+                            <td>@Html.Label("Csv File:")</td>
+                            <td><input type="file" id="fuCsvFile" name="fuCsvFile" /></td>
+                        </tr>
+                        <tr>
+                            <td valign="top">@Html.Label("Supplier:")</td>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div class="csv-block">
+                                                <input type="radio" id="rbtnCanturiCsv" name="rbtnCsv" checked="checked" value="canturi" />
+                                                <label for="rbtnCanturiCsv">Canturi CSV</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            @*<div class="csv-block">
+                                                <input type="radio" id="rbtnPanacheCsv" name="rbtnCsv" value="panache" />
+                                                <label for="rbtnPanacheCsv">Panache CSV</label>
+                                            </div>*@
+                                            <div class="csv-block">
+                                                <input type="radio" id="rbtnYDVashCsv" name="rbtnCsv" value="ydvash" />
+                                                <label for="rbtnYDVashCsv">YDVash CSV</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        @*<td>
+                                            <div class="csv-block">
+                                                <input type="radio" id="rbtnVenusJewelsCsv" name="rbtnCsv" value="venus" />
+                                                <label for="rbtnVenusJewelsCsv">Venus Jewels CSV</label>
+                                            </div>
+                                        </td>*@
+                                        <td>
+                                            <div class="csv-block">
+                                                <input type="radio" id="rbtnHariKrishnaCsv" name="rbtnCsv" value="harikrishna" />
+                                                <label for="rbtnHariKrishnaCsv">Hari Krishna CSV</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @*<tr> commented because now their API are used to populate diamond data
+                                        <td>
+                                            <div class="csv-block">
+                                                <input type="radio" id="rbtnFineStarCsv" name="rbtnCsv" value="finestar" />
+                                                <label for="rbtnFineStarCsv">Fine Star CSV</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="csv-block">
+                                                <input type="radio" id="rbtnKapuGemsCsv" name="rbtnCsv" value="kapugems" />
+                                                <label for="rbtnKapuGemsCsv">Kapu Gems CSV</label>
+                                            </div>
+                                        </td>
+                                    </tr>*@
+                                </table>
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary">
+                        Submit
+                    </button>
+                    @*<a href="@Url.Content("~/SecureAdmin/Role/List")" class="btn btn-default">Cancel</a>*@
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js" type="text/javascript"></script>
+<script src="@Url.Content("~/Areas/SecureAdmin/Content/js/bootstrap.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Areas/SecureAdmin/Content/js/AdminLTE/app.js")" type="text/javascript"></script>
+@section scripts{
+    <script src="@Url.Content("~/Areas/SecureAdmin/Content/plugins/jQuery/jQuery-2.1.4.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+}
+<script type="text/javascript">
+    $(function () {
+        $('input').on('ifClicked', function (event) {
+            var isChecked = event.delegateTarget.checked;
+            if (isChecked) {
+                isChecked = false;
+            }
+            else {
+                isChecked = true;
+            }
+        });
+    });
+</script>

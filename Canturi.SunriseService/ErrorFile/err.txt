@@ -1,0 +1,12 @@
+﻿Json file save: D:\Projects\Canturi\Canturi.SunriseService\JsonData\72915f35-fda3-46e2-b216-1063fa2de41b.json
+Json file save: D:\Projects\Canturi\Canturi.SunriseService\JsonData\5d17d256-7fe5-4e24-8e04-2581414f6cb7.json
+Json file save: D:\Projects\Canturi\Canturi.SunriseService\JsonData\2a27a99d-c974-493d-ab58-8b22c090ff0b.json
+Json file save: D:\Projects\Canturi\Canturi.SunriseService\JsonData\3b7ec19f-bacd-4250-ba3d-70bd603edfbf.json
+WebClient start - 7/20/2017 5:06:12 PM
+WebClient end - 7/20/2017 5:06:31 PM
+Json file save: D:\Projects\Canturi\Canturi.SunriseService\JsonData\a25b031a-1b22-4325-b112-1fd9f58f1d38.json - 7/20/2017 5:06:31 PM
+Successfully Inserting Diamond Procedure - 7/20/2017 5:06:45 PM
+WebClient start - 7/25/2017 2:44:40 PM
+WebClient end - 7/25/2017 2:44:56 PM
+Json file save: D:\Projects\Canturi\Canturi.SunriseService\JsonData\fd6ec3bf-6ea5-434d-af1e-b408622492f6.json - 7/25/2017 2:44:56 PM
+Successfully Inserting Diamond Procedure - 7/25/2017 2:45:18 PM

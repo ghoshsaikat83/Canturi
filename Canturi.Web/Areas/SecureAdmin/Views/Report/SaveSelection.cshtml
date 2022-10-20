@@ -1,0 +1,283 @@
+﻿@model Canturi.Models.BusinessEntity.Admin.DiamondModels
+@{
+    ViewBag.Title = "Save Selection";
+    Layout = "~/Areas/SecureAdmin/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles
+{
+
+
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.112/styles/kendo.common-material.min.css" />
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.112/styles/kendo.material.min.css" />
+
+    <style type="text/css">
+        .k-detail-cell {
+            padding: 0;
+        }
+
+        .k-grid-Delete {
+            padding: 0;
+            width: auto;
+            height: 20px;
+            width: 20px;
+        }
+    </style>
+}
+
+
+<section class="content-header">
+    <h1>
+        Emailed Selections 
+        <small>Control panel</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Content("~/Admin/DashBoard")"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Emailed Selections</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    @using (Html.BeginForm())
+    {
+
+        <div class="row">
+            @if (Model.IsShowMessage == 1)
+            {
+                if (Model.MessageClass.ToLower() == "MsgGreen".ToLower())
+                {
+                    <div class="alert alert-success alert-dismissable">
+                        <i class="fa fa-check"></i>
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                            &times;
+                        </button>
+                        @Model.Message
+                    </div>
+                }
+                else if (Model.MessageClass.ToLower() == "MsgRed".ToLower())
+                {
+                    <div class="alert alert-danger alert-dismissable">
+                        <i class="fa fa-ban"></i>
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                            &times;
+                        </button>
+                        @Model.Message
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-success alert-dismissable">
+                        <i class="fa fa-check"></i>
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                            &times;
+                        </button>
+                        @Model.Message
+                    </div>
+                }
+            }
+            <div class="top-buttons-container">
+                <a href="javascript:void(0)" class="btn btn-warning" id="linkShowHideSearch">Show search option</a>
+                <a href="javascript:void(0)" class="btn btn-primary" id="linkExportToCsv">Export To CSV</a>
+            </div>
+            <div class="event-search">
+                <div class="search-box">
+                    <h3>
+                        Search
+                    </h3>
+                    <div class="form-group">
+                        <div style="width:50%;">
+                            <label>Client Name :</label>
+                            <input type="text" class="form-control" id="txtClientName" maxlength="20" name="txtClientName" />
+                        </div>
+                        <div style="width:50%; display:none;">
+                            <label>Phone :</label>
+                            <input type="text" class="form-control" id="txtPhone" maxlength="20" name="txtPhone" />
+                        </div>
+                        <div style="width:50%;">
+                            <label>Consultant Name :</label>
+                            <input type="text" class="form-control" id="txtConsultantName" maxlength="100" name="txtConsultantName" />
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="padding-top: 10px;">
+                        <a href="javascript:void(0)" class="btn btn-success add-option" id="btnSearch">Search</a>
+                        <a href="javascript:void(0)" class="btn btn-warning" id="btnviewAll">View All</a>
+                    </div>
+
+                    <div class="cl" style="height: 20px;"><br /></div>
+                </div>
+            </div>
+            <div class="nav-tabs-custom" id="divTabs">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab_1-1" data-toggle="tab">Emailed Selections</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab_1-1">
+                        <div class="col-xs-12">
+                            <div class="box" style="float:left;">
+                                <div class="box-body table-responsive">
+                                    <div class="dash-B_window fl">
+                                        <div class="event-box fl" id="divActive" style="display: block;">
+                                            <div id="example">
+                                                <div id="grid"></div>
+                                            </div>
+                                            @*@Html.Raw(Canturi.Web.Areas.SecureAdmin.Controllers.ReportController.FnGetOrders("", "", ""))*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="cl">
+                </div>
+            </div>
+        </div>
+    }
+</section>
+
+@section scripts{
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js" type="text/javascript"></script>
+    <script src="http://kendo.cdn.telerik.com/2016.1.112/js/jquery.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/2016.1.112/js/kendo.all.min.js"></script>
+    <script type="text/x-kendo-template" id="template">
+        <div class="tabstrip">
+            <ul>
+                <li class="k-state-active">
+                    Selected Diamonds
+                </li>
+            </ul>
+            <div>
+                <div class="SelectedDiamonds"></div>
+            </div>
+
+        </div>
+
+    </script>
+
+    <script>
+
+
+        $(document).ready(function () {
+            FnBindGrid($("#txtClientName").val(), $("#txtPhone").val(), $("#txtConsultantName").val());
+        });
+        function FnBindGrid(clientName, phone, consultantName) {
+
+            var element = $("#grid").kendoGrid({
+                dataSource: {
+                    type: "json",
+                    transport: {
+                        read: '@Url.Content("~/SecureAdmin/report/FnGetFilterSaveSelection")' + '?clientName=' + $("#txtClientName").val() + '&phone=' + $("#txtPhone").val() + '&consultantName=' + $("#txtConsultantName").val()
+                    },
+                    pageSize: 20,
+                    //serverPaging: true,
+                    //serverSorting: true
+                },
+                //height: 550,
+                sortable: true,
+                pageable: true,
+                detailTemplate: kendo.template($("#template").html()),
+                detailInit: detailInit,
+                //dataBound: function () {
+                //    this.expandRow(this.tbody.find("tr.k-master-row").first());
+                //},
+                columns: [
+                    { field: "ClientName", title: "Client Name", width: "120px" },
+                    { field: "Phone", title: "Phone", width: "120px" },
+                    { field: "Date", title: "Date", width: "120px" },
+                    { field: "Currency", title: "Currency", width: "120px" },
+                    { field: "ConsultantName", title: "Consultant Name", width: "120px" },
+                   
+                    { command: { text: "Delete", click: showDetails }, title: "Action", width: "80px" }
+                ]
+            });
+            $('#grid').data('kendoGrid').dataSource.read();
+            $('#grid').data('kendoGrid').refresh();
+
+        }
+        function showDetails(e) {
+            if (confirm("Are you sure you want to delete?")) {
+                e.preventDefault();
+                var dataItem = this.dataItem($(e.currentTarget).closest("tr"));                
+                window.location = '@Url.Content("~/SecureAdmin/report/SaveSelectionDelete/")' + dataItem.SaveSelectionId;
+            }
+
+        }
+
+        function detailInit(e) {
+
+            var detailRow = e.detailRow;
+
+            detailRow.find(".tabstrip").kendoTabStrip({
+                animation: {
+                    open: { effects: "fadeIn" }
+                }
+            });
+            detailRow.find(".SelectedDiamonds").kendoGrid({
+                dataSource: {
+                    type: "json",
+                    transport: {
+                        read: "@Url.Content("~/SecureAdmin/report/FnGetSelectedDiamonds/")" + e.data.SaveSelectionId
+                    },
+                    height: 300,
+                    pageSize: 100000
+                },
+                scrollable: true,
+                sortable: true,
+                columns: [
+                    { field: "Shape", title: "SHAPE", width: "120px" },
+                    { field: "Carat", title: "CARAT", width: "80px" },
+                    { field: "Color", title: "COLOR", width: "80px" },
+                    { field: "Clartiy", title: "CLARITY", width: "80px" },
+                    { field: "Cut", title: "CUT", width: "120px" },
+                    { field: "Polish", title: "POLISH", width: "120px" },
+                    { field: "Symmetry", title: "SYMMETRY", width: "120px" },
+                    { field: "Flourescence", title: "FLUORESCENCE", width: "140px" },
+                    { field: "Price", title: "PRICE", width: "120px" },
+                    { field: "LotNumber", title: "LOT #", width: "120px" },
+                    { field: "Measurements", title: "MEASUREMENTS", width: "150px" },
+                    { field: "Ratio", title: "RATIO", width: "120px" },
+                    { field: "DiamondCertificate", title: "CERT#", width: "140px" },
+                    { field: "Supplier", title: "CODE #", width: "140px" }
+                ]
+            });
+        }
+
+        function BindGrid(clientName, phone, consultantName) {
+        }
+
+        $(document).ready(function () {
+            $("#linkShowHideSearch").click(function () {
+                $(".event-search").toggle('slow');
+                if (this.text == "Show search option") {
+                    this.text = "Hide search option";
+                }
+                else {
+                    this.text = "Show search option";
+                }
+            });
+
+            $("#btnSearch").click(function () {
+                $("#grid").html("");
+                FnBindGrid($("#txtClientName").val(), $("#txtPhone").val(), $("#txtConsultantName").val());
+            });
+
+            $("#btnviewAll").click(function () {
+                window.location = '@Url.Content("~/SecureAdmin/report/SaveSelection")';
+            });
+        });
+
+        $("#linkExportToCsv").click(function () {
+            window.location = '@Url.Action("FnExportSaveSelectionToCsv", "report")' + '?clientName=' + $("#txtClientName").val() + '&phone=' + $("#txtPhone").val() + '&consultantName=' + $("#txtConsultantName").val();
+        });
+
+        function ResetFilter() {
+            $("#txtClientName").val("");
+            $("#txtPhone").val("");
+            $("#txtConsultantName").val("");
+        }
+    </script>
+}
+
+

@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://technet.rapaport.com/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://technet.rapaport.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://technet.rapaport.com/">
+      <s:element name="Login">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="AuthenticationTicketHeader" type="tns:AuthenticationTicketHeader" />
+      <s:complexType name="AuthenticationTicketHeader">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Ticket" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="GetStones">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FeedID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Shape" type="tns:Shapes" />
+            <s:element minOccurs="1" maxOccurs="1" name="SizeFrom" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="SizeTo" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="ColorFrom" type="tns:Colors" />
+            <s:element minOccurs="1" maxOccurs="1" name="ColorTo" type="tns:Colors" />
+            <s:element minOccurs="1" maxOccurs="1" name="ClarityFrom" type="tns:Clarities" />
+            <s:element minOccurs="1" maxOccurs="1" name="ClarityTo" type="tns:Clarities" />
+            <s:element minOccurs="1" maxOccurs="1" name="CutFrom" type="tns:Cuts" />
+            <s:element minOccurs="1" maxOccurs="1" name="CutTo" type="tns:Cuts" />
+            <s:element minOccurs="1" maxOccurs="1" name="PriceFrom" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="PriceTo" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="Page" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PageSize" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="DiamondsFound" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="Shapes">
+        <s:restriction base="s:string">
+          <s:enumeration value="ROUND" />
+          <s:enumeration value="PEAR" />
+          <s:enumeration value="PRINCESS" />
+          <s:enumeration value="MARQUISE" />
+          <s:enumeration value="OVAL" />
+          <s:enumeration value="RADIANT" />
+          <s:enumeration value="EMERALD" />
+          <s:enumeration value="HEART" />
+          <s:enumeration value="CUSHION" />
+          <s:enumeration value="ASSCHER" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="Colors">
+        <s:restriction base="s:string">
+          <s:enumeration value="D" />
+          <s:enumeration value="E" />
+          <s:enumeration value="F" />
+          <s:enumeration value="G" />
+          <s:enumeration value="H" />
+          <s:enumeration value="I" />
+          <s:enumeration value="J" />
+          <s:enumeration value="K" />
+          <s:enumeration value="L" />
+          <s:enumeration value="M" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="Clarities">
+        <s:restriction base="s:string">
+          <s:enumeration value="IF" />
+          <s:enumeration value="VVS1" />
+          <s:enumeration value="VVS2" />
+          <s:enumeration value="VS1" />
+          <s:enumeration value="VS2" />
+          <s:enumeration value="SI1" />
+          <s:enumeration value="SI2" />
+          <s:enumeration value="SI3" />
+          <s:enumeration value="I1" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="Cuts">
+        <s:restriction base="s:string">
+          <s:enumeration value="EXCELLENT" />
+          <s:enumeration value="VERY_GOOD" />
+          <s:enumeration value="GOOD" />
+          <s:enumeration value="FAIR" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetStonesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetStonesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="1" maxOccurs="1" name="DiamondsFound" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStonesSecure">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="FeedID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Shape" type="tns:Shapes" />
+            <s:element minOccurs="1" maxOccurs="1" name="SizeFrom" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="SizeTo" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="ColorFrom" type="tns:Colors" />
+            <s:element minOccurs="1" maxOccurs="1" name="ColorTo" type="tns:Colors" />
+            <s:element minOccurs="1" maxOccurs="1" name="ClarityFrom" type="tns:Clarities" />
+            <s:element minOccurs="1" maxOccurs="1" name="ClarityTo" type="tns:Clarities" />
+            <s:element minOccurs="1" maxOccurs="1" name="CutFrom" type="tns:Cuts" />
+            <s:element minOccurs="1" maxOccurs="1" name="CutTo" type="tns:Cuts" />
+            <s:element minOccurs="1" maxOccurs="1" name="PriceFrom" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="PriceTo" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="Page" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PageSize" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="DiamondsFound" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStonesSecureResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetStonesSecureResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="1" maxOccurs="1" name="DiamondsFound" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSingleStoneSecure">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="FeedID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="DiamondID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSingleStoneSecureResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSingleStoneSecureResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSingleStone">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FeedID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="DiamondID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSingleStoneResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSingleStoneResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDiamonds">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Shape" type="tns:Shapes" />
+            <s:element minOccurs="1" maxOccurs="1" name="SizeFrom" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="SizeTo" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="ColorFrom" type="tns:Colors" />
+            <s:element minOccurs="1" maxOccurs="1" name="ColorTo" type="tns:Colors" />
+            <s:element minOccurs="1" maxOccurs="1" name="ClarityFrom" type="tns:Clarities" />
+            <s:element minOccurs="1" maxOccurs="1" name="ClarityTo" type="tns:Clarities" />
+            <s:element minOccurs="1" maxOccurs="1" name="CutFrom" type="tns:Cuts" />
+            <s:element minOccurs="1" maxOccurs="1" name="CutTo" type="tns:Cuts" />
+            <s:element minOccurs="1" maxOccurs="1" name="PriceFrom" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="PriceTo" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="Page" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PageSize" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="DiamondsFound" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDiamondsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDiamondsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="1" maxOccurs="1" name="DiamondsFound" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDiamondsSecure">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Shape" type="tns:Shapes" />
+            <s:element minOccurs="1" maxOccurs="1" name="SizeFrom" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="SizeTo" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="ColorFrom" type="tns:Colors" />
+            <s:element minOccurs="1" maxOccurs="1" name="ColorTo" type="tns:Colors" />
+            <s:element minOccurs="1" maxOccurs="1" name="ClarityFrom" type="tns:Clarities" />
+            <s:element minOccurs="1" maxOccurs="1" name="ClarityTo" type="tns:Clarities" />
+            <s:element minOccurs="1" maxOccurs="1" name="CutFrom" type="tns:Cuts" />
+            <s:element minOccurs="1" maxOccurs="1" name="CutTo" type="tns:Cuts" />
+            <s:element minOccurs="1" maxOccurs="1" name="PriceFrom" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="PriceTo" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="Page" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PageSize" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="DiamondsFound" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDiamondsSecureResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDiamondsSecureResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="1" maxOccurs="1" name="DiamondsFound" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSingleDiamond">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DiamondID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSingleDiamondResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSingleDiamondResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSingleDiamondSecure">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="DiamondID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSingleDiamondSecureResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSingleDiamondSecureResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSampleResults">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetSampleResultsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSampleResultsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="LoginSoapIn">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoginAuthenticationTicketHeader">
+    <wsdl:part name="AuthenticationTicketHeader" element="tns:AuthenticationTicketHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetStonesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStones" />
+  </wsdl:message>
+  <wsdl:message name="GetStonesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStonesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStonesAuthenticationTicketHeader">
+    <wsdl:part name="AuthenticationTicketHeader" element="tns:AuthenticationTicketHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetStonesSecureSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStonesSecure" />
+  </wsdl:message>
+  <wsdl:message name="GetStonesSecureSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStonesSecureResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSingleStoneSecureSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSingleStoneSecure" />
+  </wsdl:message>
+  <wsdl:message name="GetSingleStoneSecureSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSingleStoneSecureResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSingleStoneSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSingleStone" />
+  </wsdl:message>
+  <wsdl:message name="GetSingleStoneSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSingleStoneResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSingleStoneAuthenticationTicketHeader">
+    <wsdl:part name="AuthenticationTicketHeader" element="tns:AuthenticationTicketHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetDiamondsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDiamonds" />
+  </wsdl:message>
+  <wsdl:message name="GetDiamondsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDiamondsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDiamondsAuthenticationTicketHeader">
+    <wsdl:part name="AuthenticationTicketHeader" element="tns:AuthenticationTicketHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetDiamondsSecureSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDiamondsSecure" />
+  </wsdl:message>
+  <wsdl:message name="GetDiamondsSecureSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDiamondsSecureResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSingleDiamondSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSingleDiamond" />
+  </wsdl:message>
+  <wsdl:message name="GetSingleDiamondSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSingleDiamondResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSingleDiamondAuthenticationTicketHeader">
+    <wsdl:part name="AuthenticationTicketHeader" element="tns:AuthenticationTicketHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetSingleDiamondSecureSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSingleDiamondSecure" />
+  </wsdl:message>
+  <wsdl:message name="GetSingleDiamondSecureSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSingleDiamondSecureResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSampleResultsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSampleResults" />
+  </wsdl:message>
+  <wsdl:message name="GetSampleResultsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSampleResultsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="RetailFeedSoap">
+    <wsdl:operation name="Login">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">If you would like to receive the data using HTTP protocol method, call this method to register a soap header authentication ticket.</wsdl:documentation>
+      <wsdl:input message="tns:LoginSoapIn" />
+      <wsdl:output message="tns:LoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStones">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This method is obsolete. use the GetDiamonds method.</wsdl:documentation>
+      <wsdl:input message="tns:GetStonesSoapIn" />
+      <wsdl:output message="tns:GetStonesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStonesSecure">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This method is obsolete. use the GetDiamondsSecure method.</wsdl:documentation>
+      <wsdl:input message="tns:GetStonesSecureSoapIn" />
+      <wsdl:output message="tns:GetStonesSecureSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSingleStoneSecure">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This method is obsolete. use the GetSingleDiamondSecure method.</wsdl:documentation>
+      <wsdl:input message="tns:GetSingleStoneSecureSoapIn" />
+      <wsdl:output message="tns:GetSingleStoneSecureSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSingleStone">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This method is obsolete. use the GetSingleDiamond method.</wsdl:documentation>
+      <wsdl:input message="tns:GetSingleStoneSoapIn" />
+      <wsdl:output message="tns:GetSingleStoneSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDiamonds">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a grid of stones using HTTP protocol method. You must call the Login method first.</wsdl:documentation>
+      <wsdl:input message="tns:GetDiamondsSoapIn" />
+      <wsdl:output message="tns:GetDiamondsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDiamondsSecure">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a grid of stones using HTTPS protocol method.</wsdl:documentation>
+      <wsdl:input message="tns:GetDiamondsSecureSoapIn" />
+      <wsdl:output message="tns:GetDiamondsSecureSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSingleDiamond">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a single stone details using HTTP protocol method. You must call the Login method first.</wsdl:documentation>
+      <wsdl:input message="tns:GetSingleDiamondSoapIn" />
+      <wsdl:output message="tns:GetSingleDiamondSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSingleDiamondSecure">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a single stone details using HTTPS protocol method.</wsdl:documentation>
+      <wsdl:input message="tns:GetSingleDiamondSecureSoapIn" />
+      <wsdl:output message="tns:GetSingleDiamondSecureSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSampleResults">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns sample results</wsdl:documentation>
+      <wsdl:input message="tns:GetSampleResultsSoapIn" />
+      <wsdl:output message="tns:GetSampleResultsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RetailFeedSoap" type="tns:RetailFeedSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://technet.rapaport.com/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+        <soap:header message="tns:LoginAuthenticationTicketHeader" part="AuthenticationTicketHeader" use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStones">
+      <soap:operation soapAction="http://technet.rapaport.com/GetStones" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetStonesAuthenticationTicketHeader" part="AuthenticationTicketHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStonesSecure">
+      <soap:operation soapAction="http://technet.rapaport.com/GetStonesSecure" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSingleStoneSecure">
+      <soap:operation soapAction="http://technet.rapaport.com/GetSingleStoneSecure" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSingleStone">
+      <soap:operation soapAction="http://technet.rapaport.com/GetSingleStone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetSingleStoneAuthenticationTicketHeader" part="AuthenticationTicketHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDiamonds">
+      <soap:operation soapAction="http://technet.rapaport.com/GetDiamonds" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetDiamondsAuthenticationTicketHeader" part="AuthenticationTicketHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDiamondsSecure">
+      <soap:operation soapAction="http://technet.rapaport.com/GetDiamondsSecure" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSingleDiamond">
+      <soap:operation soapAction="http://technet.rapaport.com/GetSingleDiamond" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetSingleDiamondAuthenticationTicketHeader" part="AuthenticationTicketHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSingleDiamondSecure">
+      <soap:operation soapAction="http://technet.rapaport.com/GetSingleDiamondSecure" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSampleResults">
+      <soap:operation soapAction="http://technet.rapaport.com/GetSampleResults" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RetailFeedSoap12" type="tns:RetailFeedSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://technet.rapaport.com/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:LoginAuthenticationTicketHeader" part="AuthenticationTicketHeader" use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStones">
+      <soap12:operation soapAction="http://technet.rapaport.com/GetStones" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetStonesAuthenticationTicketHeader" part="AuthenticationTicketHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStonesSecure">
+      <soap12:operation soapAction="http://technet.rapaport.com/GetStonesSecure" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSingleStoneSecure">
+      <soap12:operation soapAction="http://technet.rapaport.com/GetSingleStoneSecure" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSingleStone">
+      <soap12:operation soapAction="http://technet.rapaport.com/GetSingleStone" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetSingleStoneAuthenticationTicketHeader" part="AuthenticationTicketHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDiamonds">
+      <soap12:operation soapAction="http://technet.rapaport.com/GetDiamonds" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetDiamondsAuthenticationTicketHeader" part="AuthenticationTicketHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDiamondsSecure">
+      <soap12:operation soapAction="http://technet.rapaport.com/GetDiamondsSecure" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSingleDiamond">
+      <soap12:operation soapAction="http://technet.rapaport.com/GetSingleDiamond" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetSingleDiamondAuthenticationTicketHeader" part="AuthenticationTicketHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSingleDiamondSecure">
+      <soap12:operation soapAction="http://technet.rapaport.com/GetSingleDiamondSecure" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSampleResults">
+      <soap12:operation soapAction="http://technet.rapaport.com/GetSampleResults" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RetailFeed">
+    <wsdl:port name="RetailFeedSoap" binding="tns:RetailFeedSoap">
+      <soap:address location="https://technet.rapaport.com/WebServices/RetailFeed/RetailFeed.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RetailFeedSoap12" binding="tns:RetailFeedSoap12">
+      <soap12:address location="https://technet.rapaport.com/WebServices/RetailFeed/RetailFeed.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

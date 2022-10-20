@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+
+
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    @*<meta http-equiv="refresh" content="0060; URL=target_page.html">*@    
+    <title>Canturi Diamond Search</title>
+    <link href="@Url.Content("~/favicon.ico")" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/FrontEnd/css/style.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/FrontEnd/sweetalert/sweetalert.css")" />
+    @RenderSection("Styles", required: false)
+    <noscript>
+        <meta http-equiv="refresh" content="0;url=@Url.Content("~/NOJavascript")" />
+    </noscript>
+</head>
+
+<body>
+    <!-- wrapper -->
+    <div class="wrapper">
+        <!-- header -->
+        <!-- top header box -->
+        <div class="top-header-section">
+            <div class="top-header-box">
+                <!-- logo box -->
+                <div class="logo-box">
+                    <a href="@Url.Content("~/")">
+                        <img src="@Url.Content("~/Content/FrontEnd/images/logo.png")" />
+                    </a>
+                    <div class="cl"></div>
+                </div>
+                <!-- logo box end -->
+                <!-- header user box -->
+                <div class="head-user-box">
+                    <p>Welcome :<span>@Canturi.Models.BusinessEntity.FrontEnd.UserSessionData.UserName</span></p>
+                    <p class="logout"><img src="@Url.Content("~/Content/FrontEnd/images/logout-icon.png")" align="bottom" alt="" /><span><a href="@Url.Content("~/logout")">Logout</a></span></p>
+                    <div class="cl"></div>
+                </div>
+                <!-- header user box end -->
+                <!-- header price box -->
+               
+                <div class="head-price-box">
+                    <div class="report-box"><a href="@Url.Content("~/secureadmin/report/order")" target="_blank">ACCESS REPORTS </a></div>
+                    <div class="price-select-box">
+                        @Html.Raw(Canturi.Models.BusinessHelper.CommonHelper.CommonData.GetCurrancyDropDown())
+                        @*<select name="ddlCurrancy" id="ddlCurrancy">
+                                <option selected="selected">AUD</option>
+                                <option>EURO</option>
+                                <option>DOLLER</option>
+                            </select>*@
+                        <div class="cl"></div>
+                    </div>
+                </div>
+                <!-- header price box end -->
+                <div class="cl"></div>
+            </div>
+            <div class="cl"></div>
+        </div>
+        <!-- top header box end -->
+        <!-- header search box -->
+        <div class="header-search-section">
+            <div class="header-search-box">
+                <!-- search content box -->
+                <div class="search-lftbox">
+                    WORLDWIDE DIAMOND SEARCH
+                </div>
+                <!-- search content box end -->
+                <!-- search box -->
+                <div class="search-rgtbox">
+                    <form onsubmit="javascript: return FnSearch()">
+                       
+                            <p>
+                                <label>Search by</label>
+                                <select id="ddlSearchBy">
+                                    <option value="lot">LOT #</option>
+                                    <option value="cert">CERT #</option>
+                                    <option value="code">CODE #</option>
+                                </select>
+                                <input type="text" name="txtSearchByLot" id="txtSearchByLot" placeholder="" value="@ViewBag.SearchKeyWord" />
+                                <input type="submit" id="btnSearch" />
+                            </p>
+                            
+                       
+                    </form>
+                </div>
+                <!-- search box end -->
+                <div class="cl"></div>
+            </div>
+            <div class="cl"></div>
+        </div>
+        <!-- header search box end -->
+        <!-- header end -->
+        <!-- middle section -->
+        <div class="middle-section">
+            @RenderBody()
+
+            <div class="cl"></div>
+        </div>
+        <!-- middle section end -->
+        <div class="cl"></div>
+    </div>
+    <!-- wrapper end -->
+    @RenderSection("ProgressBar", required: false)
+
+
+    <!--[if IE]><script src="@Url.Content("~/Content/FrontEnd/js/html5.js")"></script><![endif]-->
+
+
+    <script src="@Url.Content("~/Content/FrontEnd/js/jquery-1.7.1.js")"></script>
+    @*<script src="@Url.Content("~/Content/FrontEnd/js/jquery-2.2.0.min.js")"></script>*@
+    <script src="@Url.Content("~/Content/FrontEnd/sweetalert/sweetalert-dev.js")"></script>
+
+
+    @RenderSection("CurrancyScripts", required: false)
+
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
+                $(".black-overlay").hide();
+                $("#dvLoader").hide();
+                swal({
+                    title: "Session has been expired",
+                    text: "Please login again...!",
+                    type: "error",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes",
+                    cancelButtonText: 'No',
+                    closeOnConfirm: false
+                }, function () {
+                    window.location = '@Url.Content("~/")';
+                });
+            });
+            //$(document).ajaxStart(function () {
+            //    //alert("star");
+            //    $(".black-overlay").show();
+            //    $("#dvLoader").show();
+            //});
+            //$(document).ajaxStop(function () {
+            //    setTimeout(function () {
+            //        $(".black-overlay").hide();
+            //        $("#dvLoader").hide();
+            //    }, 1000);
+            //});
+        });
+
+    </script>
+</body>
+
+</html>

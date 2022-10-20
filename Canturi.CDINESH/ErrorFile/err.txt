@@ -1,0 +1,34 @@
+﻿Error on Inserting Diamond Procedure - 2/6/2017 6:23:44 PM
+Error converting data type nvarchar to numeric.
+The data for table-valued parameter "@DiamondCdinishTable" doesn't conform to the table type of the parameter.
+The statement has been terminated.
+Successfully Inserting Diamond Procedure - 2/6/2017 6:29:29 PM
+Error on Inserting Diamond Procedure - 4/17/2017 7:13:21 PM
+The content type text/html of the response message does not match the content type of the binding (text/xml; charset=utf-8). If using a custom encoder, be sure that the IsContentTypeSupported method is implemented properly. The first 1024 bytes of the response were: '<HTML><HEAD><TITLE>Access Denied</TITLE><script language="JavaScript"> var category='FashionAndBeauty';var categorylist = ['Spyware','SPAMURL','P2P','DownloadFreewareAndShareware','Gambling','Weapons','Plagiarism','CrimeandSuicide','PhishingandFraud','URLTranslationSites','Nudity','AdultContent','Violence','Porn','MilitancyandExtremist','Drugs','HateAndRacism','IllegalUnethical'];window.onload = function () { for (var i = 0; i < categorylist.length; i++) { if(categorylist[i]==category){document.getElementById('cyberoamlink').style.display='none';break; }}}; var heightVar,widthVar,timeoutInterval=50;function setHeightWidth(){   var diff,reducePer,tempVar;  if(widthVar > 700){   diff = widthVar - 700;   reducePer = 100 * diff / widthVar;   tempVar = reducePer * widthVar / 100;   widthVar = widthVar - tempVar;   tempVar = reducePer * heightVar / 100;   heightVar = heightVar - tempVar;  }  if(heightVar > 80){   diff =  heightVar - 80;   reducePer = 100 * diff / heightVar;   tempVar = reducePer * heightVar / 100; '.
+Error on Inserting Diamond Procedure - 4/17/2017 7:14:30 PM
+The content type text/html of the response message does not match the content type of the binding (text/xml; charset=utf-8). If using a custom encoder, be sure that the IsContentTypeSupported method is implemented properly. The first 1024 bytes of the response were: '<HTML><HEAD><TITLE>Access Denied</TITLE><script language="JavaScript"> var category='FashionAndBeauty';var categorylist = ['Spyware','SPAMURL','P2P','DownloadFreewareAndShareware','Gambling','Weapons','Plagiarism','CrimeandSuicide','PhishingandFraud','URLTranslationSites','Nudity','AdultContent','Violence','Porn','MilitancyandExtremist','Drugs','HateAndRacism','IllegalUnethical'];window.onload = function () { for (var i = 0; i < categorylist.length; i++) { if(categorylist[i]==category){document.getElementById('cyberoamlink').style.display='none';break; }}}; var heightVar,widthVar,timeoutInterval=50;function setHeightWidth(){   var diff,reducePer,tempVar;  if(widthVar > 700){   diff = widthVar - 700;   reducePer = 100 * diff / widthVar;   tempVar = reducePer * widthVar / 100;   widthVar = widthVar - tempVar;   tempVar = reducePer * heightVar / 100;   heightVar = heightVar - tempVar;  }  if(heightVar > 80){   diff =  heightVar - 80;   reducePer = 100 * diff / heightVar;   tempVar = reducePer * heightVar / 100; '.
+Error on Inserting Diamond Procedure - 4/17/2017 7:24:25 PM
+The content type text/html of the response message does not match the content type of the binding (text/xml; charset=utf-8). If using a custom encoder, be sure that the IsContentTypeSupported method is implemented properly. The first 1024 bytes of the response were: '<HTML><HEAD><TITLE>Access Denied</TITLE><script language="JavaScript"> var category='FashionAndBeauty';var categorylist = ['Spyware','SPAMURL','P2P','DownloadFreewareAndShareware','Gambling','Weapons','Plagiarism','CrimeandSuicide','PhishingandFraud','URLTranslationSites','Nudity','AdultContent','Violence','Porn','MilitancyandExtremist','Drugs','HateAndRacism','IllegalUnethical'];window.onload = function () { for (var i = 0; i < categorylist.length; i++) { if(categorylist[i]==category){document.getElementById('cyberoamlink').style.display='none';break; }}}; var heightVar,widthVar,timeoutInterval=50;function setHeightWidth(){   var diff,reducePer,tempVar;  if(widthVar > 700){   diff = widthVar - 700;   reducePer = 100 * diff / widthVar;   tempVar = reducePer * widthVar / 100;   widthVar = widthVar - tempVar;   tempVar = reducePer * heightVar / 100;   heightVar = heightVar - tempVar;  }  if(heightVar > 80){   diff =  heightVar - 80;   reducePer = 100 * diff / heightVar;   tempVar = reducePer * heightVar / 100; '.
+Successfully Inserting Diamond Procedure - 4/17/2017 7:47:14 PM
+Successfully Inserting Diamond Procedure - 4/18/2017 11:38:40 AM
+Successfully Inserting Diamond Procedure - 05-02-2019 11:09:35
+Successfully Inserting Diamond Procedure - 1/10/2020 12:15:14 PM
+Successfully Inserting Diamond Procedure - 1/10/2020 12:48:06 PM
+Error Timer Handler - 1/10/2020 12:49:30 PM - The DateTime represented by the string is not supported in calendar System.Globalization.GregorianCalendar. - mscorlib
+Successfully Inserting Diamond Procedure - 1/10/2020 3:23:38 PM
+Error on Inserting Diamond Procedure - 1/13/2020 4:33:15 PM
+Additional text found in JSON string after finishing deserializing object. Path 'DataList[1]', line 1, position 936.
+Error on Inserting Diamond Procedure - 1/13/2020 4:34:16 PM
+Additional text found in JSON string after finishing deserializing object. Path 'DataList[1]', line 1, position 936.
+Error on Inserting Diamond Procedure - 1/13/2020 4:35:45 PM
+Additional text found in JSON string after finishing deserializing object. Path 'DataList[1]', line 1, position 936.
+Error on Inserting Diamond Procedure - 1/13/2020 4:38:41 PM
+Additional text found in JSON string after finishing deserializing object. Path 'DataList[1]', line 1, position 936.
+Error on Inserting Diamond Procedure - 1/13/2020 6:49:46 PM
+The procedure "Usp_AddUpdDharmDiamond" has no parameter named "@DiamondCdinishTable".
+Successfully Inserting Diamond Procedure - 1/13/2020 7:01:06 PM
+Successfully Inserting Diamond Procedure - 1/13/2020 7:06:26 PM
+Error on Inserting Diamond Procedure - 1/15/2020 12:21:45 PM
+Object reference not set to an instance of an object.
+Successfully Inserting Diamond Procedure - 1/15/2020 12:23:33 PM
+Error Timer Handler - 1/16/2020 4:44:27 PM - The DateTime represented by the string is not supported in calendar System.Globalization.GregorianCalendar. - mscorlib

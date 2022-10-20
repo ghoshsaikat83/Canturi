@@ -1,0 +1,98 @@
+﻿@model Canturi.Models.BusinessEntity.FrontEnd.SaveSelectonModels
+
+<div id="divSaveSelecton" class="show-block" style="display:none">    
+    @using (Ajax.BeginForm("_SaveSelecton", "DiamondSearch", new AjaxOptions
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.InsertBefore,
+        //UpdateTargetId = "result",
+        OnSuccess = "FnHideSaveSelection()",
+        OnBegin = "FnGetSelectedDiamonds()"
+
+    }))
+    {
+        @Html.HiddenFor(m => m.SelectedDiamonds)
+        
+        <ul>
+            <li>
+                <label>Client Full Name</label>
+                    @Html.TextBoxFor(m => m.ClientName)
+                    @Html.ValidationMessageFor(x => x.ClientName)
+               
+            </li>
+            <li style="display:none"><label>ClientSurName</label>@Html.TextBoxFor(m => m.ClientSurName) @Html.ValidationMessageFor(x => x.ClientSurName)</li>
+            <li><label>Phone</label>@Html.TextBoxFor(m => m.Phone) @Html.ValidationMessageFor(x => x.Phone)</li>
+            <li><label>Date</label>@Html.TextBoxFor(m => m.Date) @Html.ValidationMessageFor(x => x.Date)</li>
+            <li><label>Email selection to</label>@Html.TextBoxFor(m => m.ConsultantEmail) @Html.ValidationMessageFor(x => x.ConsultantEmail)</li>
+            <li><input type="submit" value="submit" onclick="FnSubmitSaveSelection()" id="btnSaveSelection" />
+                <input type="button" value="cancel" class="cancel-btn" onclick="FnCancelSaveSelection()"  /></li>
+        </ul>
+
+    }
+
+    <script type="text/javascript">
+
+        function FnHideSaveSelection() {
+            $("#divSaveSelecton").hide();
+            $("#btnSaveSelection").removeAttr("disabled", "disabled");
+            $("#btnSaveSelection").removeClass("btn-loader");
+            $("#ClientName").val("");
+            $("#Phone").val("");
+            $("#Date").val("");
+            $("#ConsultantEmail").val("");
+            $("#hdnIsDiamondSave").val("1");
+            sweetAlert("", "Diamond selection has been emailed...!", "success");
+        }
+
+        function FnSubmitSaveSelection() {
+            $("#SelectedDiamonds").val("");
+            //var selected = [];
+            var count = 0;
+            $('#divSelectedDiamonds input:checked').each(function () {
+                //selected.push($(this).attr('id'));
+                //selectedId = $(this).attr('id');
+
+                var selectedDiamond = $("#" + $(this).attr('id')).attr("onclick");
+                selectedDiamond = selectedDiamond.replace('FnSelecedDiamond(', '').replace(')', '');
+                selectedDiamond = selectedDiamond.split(',');
+
+                var diamondId = selectedDiamond[1].replace("'", "").replace("'", "");
+                var type = selectedDiamond[2].replace("'", "").replace("'", "");
+
+
+
+                $("#SelectedDiamonds").val($("#SelectedDiamonds").val() + "," + diamondId + "#" + type);
+
+                count++;
+            });
+            return true;
+        }
+
+        function FnGetSelectedDiamonds() {
+            $("#btnSaveSelection").attr("disabled", "disabled");
+            $("#btnSaveSelection").addClass("btn-loader");
+        }
+
+        function FnCancelSaveSelection() {
+            swal({
+                title: "Are you sure",
+                text: "you want to cancel email selection?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes",
+                cancelButtonText: 'No',
+                closeOnConfirm: true
+            }, function () {
+                $("#ClientName").val("");
+                $("#Phone").val("");
+                $("#Date").val("");
+                $("#ConsultantEmail").val("");
+                $("#divSaveSelecton").hide();
+            });
+            
+        }
+        //cancel-btn
+    </script>
+
+</div>

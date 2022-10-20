@@ -1,0 +1,174 @@
+﻿@{
+    ViewBag.Title = "Request";
+    Layout = "~/Areas/SecureAdmin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Request</h2>
+@{
+    ViewBag.Title = "Request";
+    Layout = "~/Areas/SecureAdmin/Views/Shared/_Layout.cshtml";
+}
+@section Styles
+{
+    <link href="@Url.Content("~/Areas/SecureAdmin/Content/plugins/datatables/dataTables.bootstrap.css")" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .mini-box10 a {
+            padding-left: 10px;
+        }
+    </style>
+}
+
+<section class="content-header">
+    <h1>
+        Request Report
+        <small>Control panel</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Content("~/Admin/DashBoard")"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Request Report</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    @using (Html.BeginForm())
+    {
+        <div class="row">
+
+            <div class="top-buttons-container">
+                <a href="javascript:void(0)" class="btn btn-warning" id="linkShowHideSearch">Show search option</a>
+                <a href="javascript:void(0)" class="btn btn-primary" id="linkExportToCsv">Export To CSV</a>
+            </div>
+            <div class="event-search">
+                <div class="search-box">
+                    <h3>
+                        Search
+                    </h3>
+
+                    <div class="form-group">
+                        <div style="width:50%;">
+                            <label>Client Name :</label>
+                            <input type="text" class="form-control" id="txtClientName" maxlength="20" name="txtClientName" />
+                        </div>
+                        <div style="width:50%;">
+                            <label>Phone :</label>
+                            <input type="text" class="form-control" id="txtPhone" maxlength="20" name="txtPhone" />
+                        </div>
+                        <div style="width:50%;">
+                            <label>Consultant Name :</label>
+                            <input type="text" class="form-control" id="txtConsultantName" maxlength="100" name="txtConsultantName" />
+                        </div>
+                    </div>
+                    <div class="form-group" style="padding-top: 10px;">
+                        <a href="javascript:void(0)" class="btn btn-success add-option" id="btnSearch">Search</a>
+                        <a href="javascript:void(0)" class="btn btn-warning" id="btnviewAll">View All</a>
+                    </div>
+
+                    <div class="cl" style="height: 20px;"><br /></div>
+                </div>
+            </div>
+            <div class="nav-tabs-custom" id="divTabs">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab_1-1" data-toggle="tab">Request Report</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab_1-1">
+                        <div class="col-xs-12">
+                            <div class="box" style="float:left;">
+                                <div class="box-body table-responsive">
+                                    <div class="dash-B_window fl">
+                                        <div class="event-box fl" id="divActive" style="display: block;">
+                                            @Html.Raw(Canturi.Web.Areas.SecureAdmin.Controllers.ReportController.FnGetRequest("", "", ""))
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="cl">
+                </div>
+            </div>
+        </div>
+    }
+</section>
+
+
+@section scripts{
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js" type="text/javascript"></script>
+    <script src="@Url.Content("~/Areas/Admin/Content/js/bootstrap.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Areas/Admin/Content/js/AdminLTE/app.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Areas/SecureAdmin/Content/plugins/datatables/jquery.dataTables.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Areas/SecureAdmin/Content/plugins/datatables/dataTables.bootstrap.js")" type="text/javascript"></script>
+
+    <script type="text/javascript">
+    //example2
+    $(function () {
+        $('#activeTable').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": false,
+            "pageLength": 20
+        });
+    });
+
+
+    $(document).ready(function () {
+        $("#linkShowHideSearch").click(function () {
+            $(".event-search").toggle('slow');
+            if (this.text == "Show search option") {
+                this.text = "Hide search option";
+            }
+            else {
+                this.text = "Show search option";
+            }
+        });
+        $("#btnSearch").click(function () {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("FnGetFilterRequest", "report")',
+                timeout: 10000,
+                'async': false,
+                data: { clientName: $("#txtClientName").val(), phone: $("#txtPhone").val(), consultantName: $("#txtConsultantName").val() },
+                success: function (returndata) {
+                    if (returndata.msg == "ok") {
+                            $("#divActive").html(returndata.data);
+                            $('#activeTable').DataTable({
+                                "paging": true,
+                                "lengthChange": false,
+                                "searching": true,
+                                "ordering": true,
+                                "info": false,
+                                "pageLength": 20
+                            });
+                    }
+                    else {
+                        alert(returndata.data);
+                    }
+                }
+            }).always(function () {
+                //VIPConcierge.Web.progress.hide();
+            });
+        });
+        $("#btnviewAll").click(function () {
+            window.location = '@Url.Content("~/SecureAdmin/report/Request")';
+        });
+    });
+
+    $("#linkExportToCsv").click(function () {
+        window.location = '@Url.Action("FnExportRequestToCsv", "report")' + '?clientName=' + $("#txtClientName").val() + '&phone=' + $("#txtPhone").val() + '&txtConsultantName=' + $("#txtConsultantName").val();
+    });
+
+    function ResetFilter() {
+        $("#txtClientName").val("");
+        $("#txtPhone").val("");
+        $("#txtConsultantName").val("");
+    }
+    function ConfirmDelete() {
+        return confirm("Are you sure you want to delete?");
+    }
+    </script>
+
+}
